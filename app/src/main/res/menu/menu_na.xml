@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item4"
+            android:title="Quan ly nhan vien"
+            android:icon="@drawable/person"
+            />
+        <item
+            android:id="@+id/item5"
+            android:title="Quan ly mon an"
+            android:icon="@drawable/favorite"
+            />
+        <item
+            android:id="@+id/item6"
+            android:title="Quan ly hoa don"
+            android:icon="@drawable/money"
+            />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item7"
+            android:title="Khac">
+            <menu>
+                <item
+                    android:id="@+id/item8"
+                    android:title="Dang xuat"
+                    android:icon="@drawable/exit"
+                    />
+            </menu>
+        </item>
+    </group>
+</menu>

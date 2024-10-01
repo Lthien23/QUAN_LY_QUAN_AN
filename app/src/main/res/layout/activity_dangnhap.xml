@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Dangnhap">
+
+    <ImageView
+        android:id="@+id/img_healthy_food"
+        android:layout_width="match_parent"
+        android:layout_height="246dp"
+        android:layout_gravity="top|left"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/logo" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dang nhap"
+        android:textSize="35dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tendangnhap"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Ten dang nhap*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawablePadding="10dp" />
+
+    <EditText
+        android:id="@+id/editTC"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Mat khau*"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawableEnd="@drawable/an_mat_khau"
+        android:drawablePadding="10dp" />
+
+    <TextView
+        android:id="@+id/quenmatkhau"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Quen mat khau?"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:drawablePadding="10dp" />
+
+    <Button
+        android:id="@+id/btnDangnhap"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/nutbutton"
+        android:layout_marginTop="20dp"
+        android:text="Dang nhap" />
+
+    <Button
+        android:id="@+id/btnDangki"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/nutbutton"
+        android:text="Dang ki" />
+</LinearLayout>

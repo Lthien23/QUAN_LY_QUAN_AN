@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Dangky">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC9966"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Dang ki"
+            android:textSize="35dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+    <EditText
+        android:id="@+id/hoten_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Ho va ten*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawablePadding="10dp" />
+    <EditText
+        android:id="@+id/ngaysinh_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="Ngay sinh*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:drawableEnd="@drawable/calendar"
+        android:background="@drawable/edittext"
+        android:drawablePadding="10dp" />
+
+
+    <EditText
+        android:id="@+id/soccd_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Can cuoc cong dan*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawablePadding="10dp" />
+    <EditText
+        android:id="@+id/sdt_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="So dien thoai*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawableEnd="@drawable/phone"
+        android:drawablePadding="10dp" />
+    <EditText
+        android:id="@+id/tendangnhap_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Ten dang nhap*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawablePadding="10dp" />
+    <EditText
+        android:id="@+id/matkhau_dk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Mat khau*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawableEnd="@drawable/an_mat_khau"
+        android:drawablePadding="10dp" />
+    <EditText
+        android:id="@+id/nhaplai"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Nhap lai mat khau*"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/black"
+        android:background="@drawable/edittext"
+        android:drawableEnd="@drawable/an_mat_khau"
+        android:drawablePadding="10dp" />
+    <RadioGroup
+        android:id="@+id/radioGroupGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gioi tinh:"
+            android:textColor="@color/black"
+            android:layout_marginRight="50dp"
+            android:textSize="25dp"/>
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Nam" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Nữ" />
+
+    </RadioGroup>
+    <Button
+        android:id="@+id/btnDangki"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/nutbutton"
+        android:text="Dang ki"
+        android:textStyle="bold"/>
+
+</LinearLayout>
