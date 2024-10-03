@@ -7,30 +7,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Dangky">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#CC9966"
         android:layout_marginTop="35dp"
+        android:background="#CC9966"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Dang ki"
-            android:textSize="35dp"
             android:gravity="center_horizontal"
+            android:text="Đăng Ký"
             android:textColor="@color/black"
+            android:textSize="35dp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <EditText
         android:id="@+id/hoten_dk"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Ho va ten*"
+        android:hint="Họ và tên*"
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
         android:layout_marginTop="50dp"
@@ -43,7 +46,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:hint="Ngay sinh*"
+        android:hint="Ngày sinh*"
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
         android:layout_marginTop="20dp"
@@ -58,7 +61,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:hint="So dien thoai*"
+        android:hint="Số điện thoại* "
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
         android:layout_marginTop="20dp"

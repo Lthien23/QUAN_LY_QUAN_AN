@@ -21,8 +21,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dang nhap"
+        android:text="Đăng nhập"
         android:textSize="35dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
         android:textColor="@color/black"
         android:textStyle="bold" />
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Ten dang nhap*"
+        android:hint="Tài khoản*"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp"
         android:layout_marginTop="20dp"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Mat khau*"
+        android:hint="Mật khẩu*"
         android:textSize="30dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
@@ -60,13 +61,13 @@
         android:id="@+id/quenmatkhau"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Quen mat khau?"
-        android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
         android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
+        android:text="Quên mật khẩu?"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:drawablePadding="10dp" />
+        android:textSize="12dp" />
 
     <Button
         android:id="@+id/btnDangnhap"
@@ -75,7 +76,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/nutbutton"
         android:layout_marginTop="20dp"
-        android:text="Dang nhap" />
+        android:text="Đăng nhập" />
 
     <Button
         android:id="@+id/btnDangki"
@@ -84,5 +85,5 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/nutbutton"
-        android:text="Dang ki" />
+        android:text="Đăng ký" />
 </LinearLayout>

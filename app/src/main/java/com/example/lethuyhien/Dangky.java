@@ -55,7 +55,7 @@ public class Dangky extends AppCompatActivity {
                 {
                     Toast.makeText(Dangky.this, "Hãy nhập lại thông tin!", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(Dangky.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Dangky.this,"Đăng ký thành công!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Dangky.this, Dangnhap.class);
                     startActivity(intent);
                 }
