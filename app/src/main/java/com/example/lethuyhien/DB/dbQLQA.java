@@ -129,13 +129,13 @@ public class dbQLQA extends SQLiteOpenHelper {
     }
 
     // Phương thức kiểm tra tài khoản
-    public boolean checkAccount(String username, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_TaiKhoan + " WHERE " + COLUMN_USERNAME_ACCOUNT + " = ? AND " + COLUMN_PASSWORD + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username, password});
-        boolean exists = cursor.moveToFirst();
-        cursor.close();
-        db.close();
-        return exists;
-    }
+//    public boolean checkAccount(String username, String password) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE_TaiKhoan + " WHERE " + COLUMN_USERNAME_ACCOUNT + " = ? AND " + COLUMN_PASSWORD + " = ?";
+//        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+//        boolean exists = cursor.moveToFirst();
+//        cursor.close();
+//        db.close();
+//        return exists;
+//   }
 }
