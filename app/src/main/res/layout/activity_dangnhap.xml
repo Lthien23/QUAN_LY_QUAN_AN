@@ -42,7 +42,7 @@
         android:drawablePadding="10dp" />
 
     <EditText
-        android:id="@+id/editTC"
+        android:id="@+id/matkhau"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"

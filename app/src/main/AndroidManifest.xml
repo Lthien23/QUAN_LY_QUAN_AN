@@ -13,6 +13,18 @@
         android:theme="@style/Theme.LeThuyHien"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".thong_ke"
+            android:exported="false" />
+        <activity
+            android:name=".menu_monan"
+            android:exported="false" />
+        <activity
+            android:name=".Hoadon"
+            android:exported="false" />
+        <activity
             android:name=".QR"
             android:exported="false" />
         <activity
@@ -31,7 +43,7 @@
             android:name=".Quanlymonan"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ChitietHD"
             android:exported="false" />
         <activity
             android:name=".Trangchu"

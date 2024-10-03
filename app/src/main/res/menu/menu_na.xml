@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/item4"
-            android:title="Quan ly nhan vien"
-            android:icon="@drawable/person"
-            />
+            android:title="Quản lý nhân viên"
+            android:icon="@drawable/person" />
+
         <item
             android:id="@+id/item5"
-            android:title="Quan ly mon an"
-            android:icon="@drawable/favorite"
-            />
+            android:title="Quản lý món ăn"
+            android:icon="@drawable/favorite" />
+
         <item
             android:id="@+id/item6"
-            android:title="Quan ly hoa don"
-            android:icon="@drawable/money"
-            />
-    </group>
+            android:title="Quản lý hóa đơn"
+            android:icon="@drawable/money" />
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/item7"
-            android:title="Khac">
-            <menu>
+        <group android:checkableBehavior="single">
+                <item android:title="Khác" />
                 <item
                     android:id="@+id/item8"
-                    android:title="Dang xuat"
-                    android:icon="@drawable/exit"
-                    />
-            </menu>
-        </item>
-    </group>
+                    android:title="Đăng xuất"
+                    android:icon="@drawable/exit" />
+        </group>
 </menu>

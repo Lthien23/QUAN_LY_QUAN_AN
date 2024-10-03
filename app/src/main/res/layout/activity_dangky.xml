@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#CC9966"
+        android:layout_marginTop="35dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
         <TextView
@@ -32,7 +33,7 @@
         android:hint="Ho va ten*"
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:textColorHint="@color/black"
         android:background="@drawable/edittext"
         android:drawablePadding="10dp" />
@@ -51,20 +52,6 @@
         android:background="@drawable/edittext"
         android:drawablePadding="10dp" />
 
-
-    <EditText
-        android:id="@+id/soccd_dk"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="Can cuoc cong dan*"
-        android:layout_gravity="center_horizontal"
-        android:textSize="25sp"
-        android:layout_marginTop="20dp"
-        android:textColorHint="@color/black"
-        android:background="@drawable/edittext"
-        android:drawablePadding="10dp" />
     <EditText
         android:id="@+id/sdt_dk"
         android:layout_width="300dp"
@@ -152,7 +139,7 @@
 
     </RadioGroup>
     <Button
-        android:id="@+id/btnDangki"
+        android:id="@+id/btnDangki_dk"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"

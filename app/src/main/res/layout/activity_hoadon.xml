@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
@@ -27,18 +27,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#CC9966"
+                android:layout_marginTop="35dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="MENU"
+                    android:text="Hóa đơn"
                     android:textSize="35dp"
+                    android:layout_marginRight="40dp"
                     android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
         <TextView
             android:id="@+id/txt_hd"
             android:layout_width="wrap_content"
@@ -46,59 +53,104 @@
             android:text="HD 01"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:layout_marginLeft="10dp"
             android:textColor="@android:color/black" />
+    </LinearLayout>
+
 
         <!-- Thông tin mã bàn và thời gian -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã bàn: "
+                android:textSize="25sp"
+                android:textColor="@android:color/black" />
             <TextView
                 android:id="@+id/txt_ma_ban"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mã bàn: 1"
                 android:textSize="25sp"
                 android:textColor="@android:color/black" />
-
             <Space
                 android:layout_width="32dp"
                 android:layout_height="wrap_content" />
 
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thời gian: "
+                android:textSize="25sp"
+                android:textColor="@android:color/black" />
             <TextView
                 android:id="@+id/txt_thoi_gian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="thời gian: date"
                 android:textSize="25sp"
                 android:textColor="@android:color/black" />
         </LinearLayout>
-
-        <!-- Trạng thái -->
-        <TextView
-            android:id="@+id/txt_trang_thai"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="trạng thái"
-            android:textSize="25sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@android:color/black" />
-
-        <!-- Ghi chú -->
-        <TextView
-            android:id="@+id/txt_ghi_chu"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trạng thái:"
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/txt_trang_thai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ghi chú"
-            android:textSize="25sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/black" />
-
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <!-- Ghi chú -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ghi chú:"
+                android:textSize="25sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/black" />
+            <!-- Ghi chú -->
+            <TextView
+                android:id="@+id/txt_ghi_chu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
         <TextView
             android:id="@+id/txt_chi_tiet"
             android:layout_width="wrap_content"
@@ -122,25 +174,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
-            <Button
-                android:id="@+id/Quaylai"
-                android:layout_width="130dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_gravity="bottom|end"
-                android:background="@drawable/nutbutton"
-                android:text="Quay lai" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng: "
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/txt_thanh_tien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black" />
             <Button
                 android:id="@+id/thanhtoan"
                 android:layout_width="130dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="150dp"
                 android:layout_gravity="bottom|end"
                 android:background="@drawable/nutbutton"
-                android:text="In" />
+                android:text="Thanh toán" />
         </LinearLayout>
-
-
         <!-- Nút thêm và sửa -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/QLMA"

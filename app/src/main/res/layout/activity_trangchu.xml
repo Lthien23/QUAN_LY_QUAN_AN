@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
@@ -27,14 +27,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#CC9966"
+                android:layout_marginTop="35dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Trang chủ"
-                    android:textSize="35dp"
                     android:gravity="center_horizontal"
+                    android:layout_marginRight="50dp"
+                    android:textSize="35dp"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
@@ -53,7 +55,6 @@
             android:background="@drawable/edittext"
             android:drawableStart="@drawable/search"
             android:drawablePadding="10dp" />
-
         <!-- ListView -->
         <ListView
             android:id="@+id/ListTrangchu"
@@ -61,6 +62,10 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <FrameLayout android:id="@+id/framer"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
         <!-- BottomNavigationView ở cuối màn hình -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -72,7 +77,6 @@
             app:itemIconSize="40dp"
             app:itemTextColor="@color/white" >
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/na"
@@ -80,7 +84,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/na_layout"
-        app:menu="@menu/menu_na"
-        >
+        app:menu="@menu/menu_na">
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

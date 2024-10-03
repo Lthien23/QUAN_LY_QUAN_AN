@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
@@ -27,13 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#CC9966"
+                android:layout_marginTop="35dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Quan ly mon an"
+                    android:text="Quản lý món ăn"
                     android:textSize="35dp"
+                    android:layout_marginRight="40dp"
                     android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -46,7 +48,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:hint="Tìm kiếm mon an"
+            android:hint="Tìm kiếm món ăn"
             android:textSize="30dp"
             android:layout_marginTop="20dp"
             android:textColorHint="@color/black"
@@ -70,10 +72,10 @@
             android:id="@+id/themQLMA"
             android:layout_width="130dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="35dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/nutbutton"
-            android:text="Them" />
+            android:text="Thêm" />
 
         <Button
             android:id="@+id/suaQLMA"
@@ -82,7 +84,7 @@
             android:layout_marginLeft="60dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/nutbutton"
-            android:text="Sua" />
+            android:text="Sửa" />
     </LinearLayout>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/QLMA"

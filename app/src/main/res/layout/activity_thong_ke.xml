@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
@@ -27,13 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#CC9966"
+                android:layout_marginTop="35dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Quan ly mon an"
+                    android:text="Thống kê"
                     android:textSize="35dp"
+                    android:layout_marginRight="30dp"
                     android:gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -72,7 +74,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tien mat dau ca:"
+                android:text="Tiền mặt đầu ca:"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:layout_marginLeft="20dp"
@@ -97,7 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tien mat cuoi ca:"
+                android:text="Tiền mặt cuối ca:"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:layout_marginLeft="20dp"
@@ -131,9 +133,10 @@
                 android:id="@+id/inthongke"
                 android:layout_width="130dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/nutbutton"
-                android:text="In thong ke" />
+                android:text="In thống kê" />
         </LinearLayout>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/QLMA"

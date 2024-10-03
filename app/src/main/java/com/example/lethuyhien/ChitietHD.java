@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,8 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class Quanlymonan extends AppCompatActivity {
-
+public class ChitietHD extends AppCompatActivity {
+    Button in, Quaylai;
     DrawerLayout drawerLayout;
     NavigationView na;
     Toolbar toolbar;
@@ -30,7 +32,7 @@ public class Quanlymonan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quanlymonan);
+        setContentView(R.layout.activity_chitiet_hd);
 
         // Thiết lập các view
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -44,6 +46,8 @@ public class Quanlymonan extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         bottomNavigationView = findViewById(R.id.QLMA);
+        in=findViewById(R.id.btnin);
+        Quaylai=findViewById(R.id.Quaylai);
 
         na.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -57,13 +61,13 @@ public class Quanlymonan extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.item4) {
-                    Intent intent4 = new Intent(Quanlymonan.this, Quanlynhanvien.class);
+                    Intent intent4 = new Intent(ChitietHD.this, Quanlynhanvien.class);
                     startActivity(intent4);
                 }  else if (itemId == R.id.item5) {
-                    Intent intent5 = new Intent(Quanlymonan.this, Quanlymonan.class);
+                    Intent intent5 = new Intent(ChitietHD.this, Quanlymonan.class);
                     startActivity(intent5);
                 }else if (itemId == R.id.item6) {
-                    Intent intent6 = new Intent(Quanlymonan.this, Quanlyhoadon.class);
+                    Intent intent6 = new Intent(ChitietHD.this, Quanlyhoadon.class);
                     startActivity(intent6);
                 } else if (itemId == R.id.item8) {
                     showLogoutDialog();
@@ -78,19 +82,46 @@ public class Quanlymonan extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.item1) {
-                    Intent intent4 = new Intent(Quanlymonan.this, Trangchu.class);
+                    Intent intent4 = new Intent(ChitietHD.this, Trangchu.class);
                     startActivity(intent4);
                 }  else if (itemId == R.id.item2) {
-                    Intent intent5 = new Intent(Quanlymonan.this, menu_monan.class);
+                    Intent intent5 = new Intent(ChitietHD.this, menu_monan.class);
                     startActivity(intent5);
                 }else if (itemId == R.id.item3) {
-                    Intent intent6 = new Intent(Quanlymonan.this, Hoadon.class);
+                    Intent intent6 = new Intent(ChitietHD.this, Hoadon.class);
                     startActivity(intent6);
                 } else if (itemId == R.id.item4) {
-                    Intent intent7 = new Intent(Quanlymonan.this, thong_ke.class);
+                    Intent intent7 = new Intent(ChitietHD.this, thong_ke.class);
                     startActivity(intent7);
                 }
                 return true;
+            }
+        });
+        in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChitietHD.this);
+                builder.setTitle("Thông báo")
+                        .setMessage("In hóa đơn thành công")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Quay lại màn hình trang chủ sau khi đóng dialog
+                                Intent intent = new Intent(ChitietHD.this, Trangchu.class);
+                                startActivity(intent);
+                                finish(); // Đóng màn hình hiện tại
+                            }
+                        });
+                builder.create().show(); // Hiển thị dialog
+            }
+        });
+        Quaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Quay lại màn hình trang chủ
+                Intent intent = new Intent(ChitietHD.this, Trangchu.class);
+                startActivity(intent);
+                finish(); // Đóng màn hình hiện tại
             }
         });
 
@@ -104,7 +135,7 @@ public class Quanlymonan extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Nếu chọn "Có", chuyển hướng đến giao diện Đăng Nhập
-                        Intent intent = new Intent(Quanlymonan.this, Dangnhap.class);
+                        Intent intent = new Intent(ChitietHD.this, Dangnhap.class);
                         startActivity(intent);
                         finish(); // Hoặc gọi finish() nếu bạn muốn đóng hoạt động hiện tại
                     }
