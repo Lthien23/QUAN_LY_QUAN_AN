@@ -15,13 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <!-- AppBar với Toolbar -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -59,9 +57,9 @@
 
         <!-- ListView -->
         <ListView
-            android:id="@+id/ListMonan"
+            android:id="@+id/ListMenu"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
         <!-- Nút cố định ở góc phải màn hình -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -69,8 +67,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="40dp"
             app:backgroundTint="#CC9966"
             app:srcCompat="@drawable/add" />
         <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -59,13 +59,8 @@
         <ListView
             android:id="@+id/ListTrangchu"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
-
-        <FrameLayout android:id="@+id/framer"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"/>
         <!-- BottomNavigationView ở cuối màn hình -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

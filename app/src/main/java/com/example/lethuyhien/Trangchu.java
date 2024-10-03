@@ -5,11 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.lethuyhien.Adapter.Trang_chu_Adapter;
+import com.example.lethuyhien.Model.Trang_chu;
 import com.example.lethuyhien.R;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,30 +31,58 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class Trangchu extends AppCompatActivity  {
 
     DrawerLayout drawerLayout;
     NavigationView na;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
+    ListView listView;
+    Trang_chu tc;
+    Trang_chu_Adapter adapter;
+    private ArrayList<Trang_chu> list=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trangchu);
-
         // Thiết lập các view
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        listView=findViewById(R.id.ListTrangchu);
         drawerLayout = findViewById(R.id.main);
         na = findViewById(R.id.na);
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        list.add(new Trang_chu(R.drawable.ban_an,1," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,2," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,3," 6 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,4," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,5," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,6," 4 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,7," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,8," 5 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,9," 3 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,10," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,11," 4 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,12," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,13," 6 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,14," 4 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,15," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,16," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,17," 6 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,18," 2 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,19," 4 chỗ","Trống"));
+        list.add(new Trang_chu(R.drawable.ban_an,20," 2 chỗ","Trống"));
+        adapter=new Trang_chu_Adapter(this,list);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         na.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -86,6 +118,7 @@ public class Trangchu extends AppCompatActivity  {
                 int itemId = item.getItemId();
                 if (itemId == R.id.item1) {
                     Intent intent4 = new Intent(Trangchu.this, Trangchu.class);
+                    intent4.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent4);
                 }  else if (itemId == R.id.item2) {
                     Intent intent5 = new Intent(Trangchu.this, menu_monan.class);
