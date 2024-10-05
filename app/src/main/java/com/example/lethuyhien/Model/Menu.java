@@ -5,15 +5,25 @@ public class Menu {
     private String tenmonan;
     private double gia;
     private String loai;
+    private int soluong;
 
     public Menu() {
     }
 
-    public Menu(int anhmenu, String tenmonan, double gia, String loai) {
+    public Menu(int anhmenu, String tenmonan, double gia, String loai,int soluong) {
         this.anhmenu = anhmenu;
         this.tenmonan = tenmonan;
         this.gia = gia;
         this.loai=loai;
+        this.soluong=0;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public String getLoai() {

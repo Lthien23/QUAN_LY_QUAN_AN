@@ -3,6 +3,7 @@ package com.example.lethuyhien;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -133,6 +134,11 @@ public class Trangchu extends AppCompatActivity  {
                 return true;
             }
         });
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            // Hiển thị dialog khi nhấn giữ vào item
+            showOptionDialog(position);
+            return true; // Trả về true để chỉ định rằng sự kiện đã được xử lý
+        });
 
     }
 
@@ -158,4 +164,44 @@ public class Trangchu extends AppCompatActivity  {
                 .create()
                 .show();
     }
+    private void showOptionDialog(int position) {
+        // Tạo AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(Trangchu.this);
+        builder.setTitle("Lựa chọn hành động");
+        // Thiết lập hai lựa chọn "Thanh toán" và "Gọi món"
+        builder.setItems(new String[]{"Thanh toán", "Gọi món"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    // Chuyển sang màn hình hóa đơn
+                    list.get(position).setTrangthai("Trống");
+                    adapter.notifyDataSetChanged();  // Cập nhật giao diện
+                    Intent intent = new Intent(Trangchu.this, Hoadon.class);
+                    intent.putExtra("ban_so", position + 1); // Gửi số bàn
+                    startActivity(intent);
+                } else if (which == 1) {
+                    // Cập nhật trạng thái bàn ăn thành "Có khách"
+                    list.get(position).setTrangthai("Có khách");
+                    adapter.notifyDataSetChanged();  // Cập nhật giao diện
+                    // Chuyển sang màn hình gọi món
+                    Intent intent = new Intent(Trangchu.this, menu_monan.class);
+                    intent.putExtra("ban_so", position + 1); // Gửi số bàn
+                    startActivity(intent);
+                }
+            }
+        });
+        // Hiển thị Dialog
+        builder.show();
+    }
+    private void capNhatTrangThaiBan() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MonAnDaChon", MODE_PRIVATE);
+        for (Trang_chu banAn : list) {
+            if (sharedPreferences.contains("Bàn " + banAn.getId_ban())) {
+                banAn.setTrangthai("Có khách");
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
 }

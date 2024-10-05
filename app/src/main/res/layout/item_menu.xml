@@ -94,13 +94,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
                 android:textColor="@color/black"/>
+
             <Button
                 android:id="@+id/tru"
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="30dp"
-                android:text="-"
                 android:layout_gravity="bottom|end"
-                android:background="@drawable/botron" />
+                android:background="@drawable/botron"
+                android:text="-" />
         </LinearLayout>
     </LinearLayout>
 

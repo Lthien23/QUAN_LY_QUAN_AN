@@ -3,9 +3,12 @@ package com.example.lethuyhien;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,6 +24,7 @@ import com.example.lethuyhien.Adapter.Trang_chu_Adapter;
 import com.example.lethuyhien.Adapter.menu_adapter;
 import com.example.lethuyhien.Model.Menu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -52,30 +56,30 @@ public class menu_monan extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         bottomNavigationView = findViewById(R.id.QLMA);
-        list.add(new Menu(R.drawable.bap_cai_cuon,"Bắp cải cuộn",25000,"Món chính"));
-        list.add(new Menu(R.drawable.bo_kho,"Bò kho",70000,"Món chính"));
-        list.add(new Menu(R.drawable.ca_kho,"Cá kho",70000,"Món chính"));
-        list.add(new Menu(R.drawable.canh_bi,"Canh bí",50000,"Món chính"));
-        list.add(new Menu(R.drawable.canh_bi_dao,"Canh bí đao",50000,"Món chính"));
-        list.add(new Menu(R.drawable.canh_kho_qua,"Canh khổ qua",50000,"Món chính"));
-        list.add(new Menu(R.drawable.canh_chua,"Canh chua",50000,"Món chính"));
-        list.add(new Menu(R.drawable.canh_xuong,"Canh xương",50000,"Món chính"));
-        list.add(new Menu(R.drawable.cha_la_lot,"Chả lá lốt",40000,"Món chính"));
-        list.add(new Menu(R.drawable.cha_trung,"Chả trứng",40000,"Món chính"));
-        list.add(new Menu(R.drawable.cuon_thit,"Cuốn thịt",40000,"Món chính"));
-        list.add(new Menu(R.drawable.dau_hu_nhoi,"Đậu hũ nhồi",40000,"Món chính"));
-        list.add(new Menu(R.drawable.mien_tron,"Miến trộn",30000,"Món chính"));
-        list.add(new Menu(R.drawable.nem_lui,"Nem lụi",40000,"Món chính"));
-        list.add(new Menu(R.drawable.rau_cai_xao_toi,"Rau cải xào tỏi",25000,"Món chính"));
-        list.add(new Menu(R.drawable.rau_luoc_ngu_sac,"Rau luộc ngũ sắc",25000,"Món chính"));
-        list.add(new Menu(R.drawable.rau_muong_xao_toi,"Rau muống xào tỏi",25000,"Món chính"));
-        list.add(new Menu(R.drawable.thit_ba_chi_rang,"Thịt ba chỉ rang",70000,"Món chính"));
-        list.add(new Menu(R.drawable.thit_bo_xao,"Thịt bò xào",70000,"Món chính"));
-        list.add(new Menu(R.drawable.thit_kho_tau,"Thịt kho tàu",70000,"Món chính"));
-        list.add(new Menu(R.drawable.thit_luoc,"Thịt luộc",70000,"Món chính"));
-        list.add(new Menu(R.drawable.vit_quay,"Vịt quay",70000,"Món chính"));
-        list.add(new Menu(R.drawable.xoi_ga,"Xôi gà",70000,"Món chính"));
-        list.add(new Menu(R.drawable.bap_cai_luoc,"Bắp cải luộc",25000,"Món chính"));
+        list.add(new Menu(R.drawable.bap_cai_cuon,"Bắp cải cuộn",25000,"Món chính",0));
+        list.add(new Menu(R.drawable.bo_kho,"Bò kho",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.ca_kho,"Cá kho",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.canh_bi,"Canh bí",50000,"Món chính",0));
+        list.add(new Menu(R.drawable.canh_bi_dao,"Canh bí đao",50000,"Món chính",0));
+        list.add(new Menu(R.drawable.canh_kho_qua,"Canh khổ qua",50000,"Món chính",0));
+        list.add(new Menu(R.drawable.canh_chua,"Canh chua",50000,"Món chính",0));
+        list.add(new Menu(R.drawable.canh_xuong,"Canh xương",50000,"Món chính",0));
+        list.add(new Menu(R.drawable.cha_la_lot,"Chả lá lốt",40000,"Món chính",0));
+        list.add(new Menu(R.drawable.cha_trung,"Chả trứng",40000,"Món chính",0));
+        list.add(new Menu(R.drawable.cuon_thit,"Cuốn thịt",40000,"Món chính",0));
+        list.add(new Menu(R.drawable.dau_hu_nhoi,"Đậu hũ nhồi",40000,"Món chính",0));
+        list.add(new Menu(R.drawable.mien_tron,"Miến trộn",30000,"Món chính",0));
+        list.add(new Menu(R.drawable.nem_lui,"Nem lụi",40000,"Món chính",0));
+        list.add(new Menu(R.drawable.rau_cai_xao_toi,"Rau cải xào tỏi",25000,"Món chính",0));
+        list.add(new Menu(R.drawable.rau_luoc_ngu_sac,"Rau luộc ngũ sắc",25000,"Món chính",0));
+        list.add(new Menu(R.drawable.rau_muong_xao_toi,"Rau muống xào tỏi",25000,"Món chính",0));
+        list.add(new Menu(R.drawable.thit_ba_chi_rang,"Thịt ba chỉ rang",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.thit_bo_xao,"Thịt bò xào",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.thit_kho_tau,"Thịt kho tàu",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.thit_luoc,"Thịt luộc",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.vit_quay,"Vịt quay",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.xoi_ga,"Xôi gà",70000,"Món chính",0));
+        list.add(new Menu(R.drawable.bap_cai_luoc,"Bắp cải luộc",25000,"Món chính",0));
         adapter=new menu_adapter(this,list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -84,6 +88,24 @@ public class menu_monan extends AppCompatActivity {
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        FloatingActionButton themButton = findViewById(R.id.fab);
+
+        themButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Thực hiện hành động lưu số lượng món ăn
+                luuMonAnDaChon();
+
+                // Hiển thị thông báo thêm món thành công
+                Toast.makeText(menu_monan.this, "Thêm món thành công", Toast.LENGTH_SHORT).show();
+
+                // Chuyển về trang chủ (Trangchu activity)
+                Intent intent = new Intent(menu_monan.this, Trangchu.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish(); // Đóng activity hiện tại
+            }
+        });
 
         // Thiết lập listener cho NavigationView
         na.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -152,4 +174,20 @@ public class menu_monan extends AppCompatActivity {
                 .create()
                 .show();
     }
+    private void luuMonAnDaChon() {
+        // Lấy SharedPreferences một lần trước khi vòng lặp
+        SharedPreferences sharedPreferences = getSharedPreferences("MonAnDaChon", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        // Duyệt qua danh sách món ăn để lưu món đã chọn với số lượng
+        for (Menu monAn : list) {
+            if (monAn.getSoluong() > 0) {
+                // Lưu tên món ăn và số lượng vào SharedPreferences
+                editor.putInt(monAn.getTenmonan(), monAn.getSoluong());
+            }
+        }
+        // Áp dụng thay đổi
+        editor.apply();
+    }
+
+
 }
