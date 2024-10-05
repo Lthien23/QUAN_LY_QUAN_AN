@@ -1,10 +1,23 @@
 package com.example.lethuyhien;
 
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_Gioitinh;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_Hoten;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_Ngaysinh;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_PASSWORD;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_Sdt;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_USERNAME_ACCOUNT;
+import static com.example.lethuyhien.DB.dbQLQA.COLUMN_idNhanVien_ACCOUNT;
+import static com.example.lethuyhien.DB.dbQLQA.TABLE_NhanVien;
+import static com.example.lethuyhien.DB.dbQLQA.TABLE_TaiKhoan;
+
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,54 +25,78 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Dangky extends AppCompatActivity {
+import com.example.lethuyhien.DB.dbQLQA;
 
+public class Dangky extends AppCompatActivity {
+    public EditText hoten_dk, ngaysinh_dk, sdthoai, tendangnhap, matkhau, nhaplai;
+    public RadioGroup radioGroupGender;
+    private Button btnDangki;
+
+    // Khởi tạo cơ sở dữ liệu
+    private dbQLQA database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangky);
+
+        // Thiết lập view
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button btnDangki = findViewById(R.id.btnDangki_dk);
-        EditText hoten_dk=findViewById(R.id.hoten_dk);
-        EditText ngaysinh_dk=findViewById(R.id.ngaysinh_dk);
-        EditText sdt=findViewById(R.id.sdt_dk);
-        EditText tendangnhap=findViewById(R.id.tendangnhap_dk);
-        EditText matkhau=findViewById(R.id.matkhau_dk);
-        EditText nhaplai=findViewById(R.id.nhaplai);
+
+        database = new dbQLQA(this);
+        // Khởi tạo các EditText và Button
+        hoten_dk = findViewById(R.id.hoten_dk);
+        ngaysinh_dk = findViewById(R.id.ngaysinh_dk);
+        sdthoai = findViewById(R.id.sdt_dk);
+        tendangnhap = findViewById(R.id.tendangnhap_dk);
+        matkhau = findViewById(R.id.matkhau_dk);
+        nhaplai = findViewById(R.id.nhaplai);
+        radioGroupGender = findViewById(R.id.radioGroupGender);
+        btnDangki = findViewById(R.id.btnDangki_dk);
         btnDangki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Lấy thông tin từ các EditText
                 String hoten = hoten_dk.getText().toString();
                 String ngaysinh = ngaysinh_dk.getText().toString();
-                String sodienthoai = sdt.getText().toString();
-                String tendangnhap_dk = tendangnhap.getText().toString();
-                String matkhau_dk = matkhau.getText().toString();
+                String sdt = sdthoai.getText().toString();
+                String username = tendangnhap.getText().toString();
+                String password = matkhau.getText().toString();
                 String nhaplai_dk = nhaplai.getText().toString();
-                if(hoten.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập ho ten!", Toast.LENGTH_SHORT).show();}
-                if(ngaysinh.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập ngay sinh!", Toast.LENGTH_SHORT).show();}
-                if(sodienthoai.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập so dien thoai!", Toast.LENGTH_SHORT).show();}
-                if(tendangnhap_dk.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập ten dang nhap!", Toast.LENGTH_SHORT).show();}
-                if(matkhau_dk.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập mat khau!", Toast.LENGTH_SHORT).show();}
-                if(nhaplai_dk.isEmpty())
-                {Toast.makeText(Dangky.this, "Hãy nhập lai mật khẩu!", Toast.LENGTH_SHORT).show();}
-                if (hoten.isEmpty() || ngaysinh.isEmpty()|| sodienthoai.isEmpty()|| tendangnhap_dk.isEmpty()|| matkhau_dk.isEmpty()|| nhaplai_dk.isEmpty())
-                {
+
+                // Kiểm tra các trường nhập liệu
+                if (hoten.isEmpty() || ngaysinh.isEmpty() || sdt.isEmpty() ||
+                        username.isEmpty() || password.isEmpty() || nhaplai_dk.isEmpty()) {
                     Toast.makeText(Dangky.this, "Hãy nhập lại thông tin!", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(Dangky.this,"Đăng ký thành công!",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Dangky.this, Dangnhap.class);
-                    startActivity(intent);
+                    return;
                 }
+
+                if (!password.equals(nhaplai_dk)) {
+                    Toast.makeText(Dangky.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Lấy giới tính
+                String gioitinh;
+                int selectedId = radioGroupGender.getCheckedRadioButtonId();
+                if (selectedId == R.id.radioMale) {
+                    gioitinh = "Nam";
+                } else if (selectedId == R.id.radioFemale) {
+                    gioitinh = "Nữ";
+                } else {
+                    gioitinh = "Khác"; // Hoặc bạn có thể yêu cầu người dùng chọn giới tính
+                }
+                // Gọi hàm registerUser
+                database.registerUser(hoten, ngaysinh, sdt, gioitinh, username, password);
+                Toast.makeText(Dangky.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Dangky.this, Dangnhap.class);
+                startActivity(intent);
+                finish(); // Kết thúc hoạt động đăng ký
             }
         });
     }
+
 }
