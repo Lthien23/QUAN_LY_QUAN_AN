@@ -8,11 +8,12 @@
     android:orientation="vertical"
     android:background="@drawable/anhbia"
     android:padding="8dp">
+
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:scaleType="fitXY"
-        tools:srcCompat="@tools:sample/avatars"/>
+        android:src="@drawable/anhminhhoa"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,18 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text="Tên người dùng:"
+            android:text="Tên: "
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"/>
         <TextView
             android:id="@+id/tennguoidung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,20 +42,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text="Số điện thoại:"
+            android:text="Số điện thoại: "
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"/>
         <TextView
             android:id="@+id/so_dien_thoai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textSize="20dp"/>
     </LinearLayout>
-
-
-
 </LinearLayout>

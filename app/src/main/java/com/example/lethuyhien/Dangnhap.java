@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.lethuyhien.Database.dbQLQA;
+
 public class Dangnhap extends AppCompatActivity {
 
     @Override
@@ -27,28 +29,48 @@ public class Dangnhap extends AppCompatActivity {
         Button btnDangki = findViewById(R.id.btnDangki);
         EditText tendangnhap=findViewById(R.id.tendangnhap);
         EditText matkhau=findViewById(R.id.matkhau);
+
         btnDangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ten = tendangnhap.getText().toString();
-                String pass = matkhau.getText().toString();
+                String username = tendangnhap.getText().toString();
+                String password = matkhau.getText().toString();
 
-                if (ten.equals("admin1")&&pass.equals("admin1"))
-                {
-                    Toast.makeText(Dangnhap.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                if (username.isEmpty()) {
+                    Toast.makeText(Dangnhap.this, "Hãy nhập tài khoản!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.isEmpty()) {
+                    Toast.makeText(Dangnhap.this, "Hãy nhập mật khẩu!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Kiểm tra nếu là admin
+                if (username.equals("admin1") && password.equals("admin1")) {
+                    Toast.makeText(Dangnhap.this, "Đăng nhập thành công với tư cách admin!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Dangnhap.this, Trangchu.class);
                     startActivity(intent);
+                    return;
                 }
-                if(ten.isEmpty())
-                {Toast.makeText(Dangnhap.this, "Hãy nhập tài khoản!", Toast.LENGTH_SHORT).show();}
-                if(pass.isEmpty())
-                {Toast.makeText(Dangnhap.this, "Hãy nhập mật khẩu!", Toast.LENGTH_SHORT).show();}
-                if (ten.isEmpty() || pass.isEmpty())
-                {
-                   Toast.makeText(Dangnhap.this, "Hãy nhập lại thông tin!", Toast.LENGTH_SHORT).show();
-               }
+
+                // Kiểm tra tài khoản trong cơ sở dữ liệu
+                dbQLQA db = new dbQLQA(Dangnhap.this);
+                boolean accountExists = db.checkAccount(username, password);
+                if (accountExists) {
+                    Toast.makeText(Dangnhap.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Dangnhap.this, Trangchu.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(Dangnhap.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                }
+                // Trong Dangnhap.java, sau khi đăng nhập thành công
+                Intent intent = new Intent(Dangnhap.this, Trangchu.class);
+                intent.putExtra("username", username); // Gửi tên đăng nhập
+                startActivity(intent);
+
             }
         });
+
         btnDangki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,27 +1,19 @@
 package com.example.lethuyhien.Model;
 
+
 public class Trang_chu {
-    private  int anh;
-    private  int id_ban;
+    private int id_ban;
+    private byte[] anh;
     private String socho;
-    private  String trangthai;
+    private String trangthai;
 
-    public Trang_chu() {
-    }
+    public Trang_chu() {}
 
-    public Trang_chu(int anh,int id_ban, String socho, String trangthai) {
-        this.anh=anh;
+    public Trang_chu(int id_ban, byte[] anh, String socho, String trangthai) {
         this.id_ban = id_ban;
+        this.anh = anh;
         this.socho = socho;
         this.trangthai = trangthai;
-    }
-
-    public int getAnh() {
-        return anh;
-    }
-
-    public void setAnh(int anh) {
-        this.anh = anh;
     }
 
     public int getId_ban() {
@@ -30,6 +22,14 @@ public class Trang_chu {
 
     public void setId_ban(int id_ban) {
         this.id_ban = id_ban;
+    }
+
+    public byte[] getAnh() {
+        return anh;
+    }
+
+    public void setAnh(byte[] anh) {
+        this.anh = anh;
     }
 
     public String getSocho() {

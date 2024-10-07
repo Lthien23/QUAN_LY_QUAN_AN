@@ -4,17 +4,24 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 import com.example.lethuyhien.Adapter.Trang_chu_Adapter;
+import com.example.lethuyhien.Database.dbQLQA;
+import com.example.lethuyhien.Model.NhanVien;
 import com.example.lethuyhien.Model.Trang_chu;
-import com.example.lethuyhien.R;
 
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,25 +32,32 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Trangchu extends AppCompatActivity  {
-
     DrawerLayout drawerLayout;
     NavigationView na;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
-    ListView listView;
+    RecyclerView recyclerView;
     Trang_chu tc;
+    EditText editTextTimKiem;
     Trang_chu_Adapter adapter;
-    private ArrayList<Trang_chu> list=new ArrayList<>();
+    ArrayList<Trang_chu> imageArry = new ArrayList<Trang_chu>();
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    List<Trang_chu> danhSachBan;
+    List<Trang_chu> danhSachTimKiem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,35 +69,91 @@ public class Trangchu extends AppCompatActivity  {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        listView=findViewById(R.id.ListTrangchu);
+        dbQLQA db = new dbQLQA(this);
+        editTextTimKiem = findViewById(R.id.editTC);
         drawerLayout = findViewById(R.id.main);
         na = findViewById(R.id.na);
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        list.add(new Trang_chu(R.drawable.ban_an,1," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,2," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,3," 6 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,4," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,5," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,6," 4 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,7," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,8," 5 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,9," 3 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,10," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,11," 4 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,12," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,13," 6 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,14," 4 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,15," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,16," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,17," 6 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,18," 2 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,19," 4 chỗ","Trống"));
-        list.add(new Trang_chu(R.drawable.ban_an,20," 2 chỗ","Trống"));
-        adapter=new Trang_chu_Adapter(this,list);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
+        recyclerView = findViewById(R.id.ListTrangchu);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Đặt layout manager cho RecyclerView
+
+        // Lấy tất cả các bàn từ cơ sở dữ liệu
+        danhSachBan = db.getAllContacts();
+        danhSachTimKiem = new ArrayList<>(danhSachBan);
+
+        // Khởi tạo adapter và gán cho RecyclerView
+        adapter = new Trang_chu_Adapter(this, danhSachTimKiem);  // Không cần truyền layout ở đây
+        recyclerView.setAdapter(adapter);
+
+        // Thiết lập listener cho EditText tìm kiếm
+        editTextTimKiem = findViewById(R.id.editTC);
+        editTextTimKiem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Không cần xử lý ở đây
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                danhSachTimKiem.clear();  // Xóa danh sách tìm kiếm cũ
+
+                if (!s.toString().isEmpty()) {
+                    String searchText = s.toString().toLowerCase();  // Lấy văn bản tìm kiếm và chuyển thành chữ thường
+
+                    // Tìm kiếm theo idBan, số chỗ hoặc trạng thái
+                    for (Trang_chu ban : danhSachBan) {
+                        if (String.valueOf(ban.getId_ban()).contains(searchText) ||
+                                ban.getSocho().toLowerCase().contains(searchText) ||
+                                ban.getTrangthai().toLowerCase().contains(searchText)) {
+                            danhSachTimKiem.add(ban);  // Thêm kết quả vào danh sách tìm kiếm
+                        }
+                    }
+
+                    if (danhSachTimKiem.isEmpty()) {
+                        Toast.makeText(Trangchu.this, "Không tìm thấy kết quả phù hợp!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Nếu ô tìm kiếm trống, hiển thị lại toàn bộ danh sách
+                    danhSachTimKiem.addAll(danhSachBan);
+                }
+
+                // Cập nhật lại RecyclerView
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Không cần xử lý ở đây
+            }
+        });
+
+        // Nếu cơ sở dữ liệu trống, thêm vài bàn mẫu
+        if (db.getContactsCount() == 0) {
+            db.addContact(new Trang_chu(1, null, "4", "Trống"));
+            db.addContact(new Trang_chu(2, null, "6", "Có khách"));
+            db.addContact(new Trang_chu(3, null, "2", "Trống"));
+        }
+
+        // Thiết lập NavigationView và DrawerLayout
+        drawerLayout = findViewById(R.id.main);
+        na = findViewById(R.id.na);
+        toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+
+        View headerView = na.getHeaderView(0); // Lấy view header của NavigationView
+        String username = getIntent().getStringExtra("username");
+
+        NhanVien nhanVien = db.getThongTinNhanVien(username);
+        if (nhanVien != null) {
+            TextView tvEmployeeName = headerView.findViewById(R.id.tennguoidung);
+            TextView tvPhoneNumber = headerView.findViewById(R.id.so_dien_thoai);
+            tvEmployeeName.setText(nhanVien.getHoten());
+            tvPhoneNumber.setText(nhanVien.getSdt());
+        }
+
 
         na.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -134,11 +204,13 @@ public class Trangchu extends AppCompatActivity  {
                 return true;
             }
         });
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            // Hiển thị dialog khi nhấn giữ vào item
+        adapter.setOnItemLongClickListener(position -> {
+            // Hiển thị Log và gọi phương thức xử lý khi item được long-click
+            Log.d("RecyclerView", "Item long-clicked at position: " + position);
             showOptionDialog(position);
-            return true; // Trả về true để chỉ định rằng sự kiện đã được xử lý
         });
+
+
 
     }
 
@@ -165,37 +237,34 @@ public class Trangchu extends AppCompatActivity  {
                 .show();
     }
     private void showOptionDialog(int position) {
-        // Tạo AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(Trangchu.this);
         builder.setTitle("Lựa chọn hành động");
-        // Thiết lập hai lựa chọn "Thanh toán" và "Gọi món"
         builder.setItems(new String[]{"Thanh toán", "Gọi món"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
                     // Chuyển sang màn hình hóa đơn
-                    list.get(position).setTrangthai("Trống");
+                    imageArry.get(position).setTrangthai("Trống");
                     adapter.notifyDataSetChanged();  // Cập nhật giao diện
                     Intent intent = new Intent(Trangchu.this, Hoadon.class);
-                    intent.putExtra("ban_so", position + 1); // Gửi số bàn
+                    intent.putExtra("ban_so", position + 1);
                     startActivity(intent);
                 } else if (which == 1) {
                     // Cập nhật trạng thái bàn ăn thành "Có khách"
-                    list.get(position).setTrangthai("Có khách");
+                    imageArry.get(position).setTrangthai("Có khách");
                     adapter.notifyDataSetChanged();  // Cập nhật giao diện
-                    // Chuyển sang màn hình gọi món
                     Intent intent = new Intent(Trangchu.this, menu_monan.class);
-                    intent.putExtra("ban_so", position + 1); // Gửi số bàn
+                    intent.putExtra("ban_so", position + 1);
                     startActivity(intent);
                 }
             }
         });
-        // Hiển thị Dialog
         builder.show();
     }
+
     private void capNhatTrangThaiBan() {
         SharedPreferences sharedPreferences = getSharedPreferences("MonAnDaChon", MODE_PRIVATE);
-        for (Trang_chu banAn : list) {
+        for (Trang_chu banAn : imageArry) {
             if (sharedPreferences.contains("Bàn " + banAn.getId_ban())) {
                 banAn.setTrangthai("Có khách");
             }
