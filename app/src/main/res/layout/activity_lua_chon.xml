@@ -7,7 +7,7 @@
     tools:context=".LuaChonActivity"
     android:orientation="vertical"
     android:padding="30dp"
-    android:background="@color/white"
+    android:background="@drawable/nen_na"
     >
 
     <ImageView

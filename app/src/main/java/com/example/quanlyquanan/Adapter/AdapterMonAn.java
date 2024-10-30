@@ -79,7 +79,7 @@ public class AdapterMonAn extends BaseAdapter {
             Bitmap bitmap = BitmapFactory.decodeByteArray(menuimage,0,menuimage.length);
             viewholder.img_custommenu_HinhMon.setImageBitmap(bitmap);
         }else {
-            viewholder.img_custommenu_HinhMon.setImageResource(R.drawable.cafe_americano);
+            viewholder.img_custommenu_HinhMon.setImageResource(R.drawable.monanminhhoa);
         }
 
         return view;

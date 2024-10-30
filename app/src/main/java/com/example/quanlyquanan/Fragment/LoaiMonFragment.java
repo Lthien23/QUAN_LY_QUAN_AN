@@ -82,7 +82,7 @@ public class LoaiMonFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_loai_mon,container,false);
         setHasOptionsMenu(true);
-        ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý thực đơn");
+        ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý loại món");
 
         gvCategory = (GridView)view.findViewById(R.id.gvCategory);
 

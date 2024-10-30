@@ -178,6 +178,5 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
             return true;
         }
     }
-    //endregion
 
 }

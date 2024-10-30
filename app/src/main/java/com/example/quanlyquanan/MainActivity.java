@@ -20,18 +20,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //tạo đối tượng view
         ImageView IMGLogo = (ImageView)findViewById(R.id.imgLogo);
-        TextView TXTCoffeeshop = (TextView)findViewById(R.id.txtCoffeeshop);
         TextView TXTPowered = (TextView)findViewById(R.id.txtPowered);
 
-        //lấy đối tượng animation
         Animation sideAnim = AnimationUtils.loadAnimation(this,R.anim.side_anim);
         Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anim);
 
-        //thiết lập animation cho component
         IMGLogo.setAnimation(sideAnim);
-        TXTCoffeeshop.setAnimation(sideAnim);
         TXTPowered.setAnimation(bottomAnim);
 
         new Handler().postDelayed(new Runnable() {
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LuaChonActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish(); //destroy activity khi back sẽ ko về splash
+                finish();
             }
         },SPLASH_TIMER);
     }

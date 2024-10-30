@@ -82,7 +82,7 @@ public class MonAnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mon_an,container,false);
-        ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý thực đơn");
+        ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý món ăn");
         monDAO = new MonDAO(getActivity());
 
         gvDisplayMenu = (GridView)view.findViewById(R.id.gvDisplayMenu);

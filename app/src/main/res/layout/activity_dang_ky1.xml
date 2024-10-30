@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DangKy1Activity"
-    android:background="@color/white"
+    android:background="@drawable/nen_na"
     android:padding="30dp"
     android:transitionName="transition_signup"
     android:id="@+id/layoutRegister"

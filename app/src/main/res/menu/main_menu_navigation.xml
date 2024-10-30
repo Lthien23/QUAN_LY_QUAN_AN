@@ -21,7 +21,7 @@
                         android:icon="@drawable/ic_baseline_airline_seat_legroom_normal_24"/>
                     <item
                         android:id="@+id/nav_category"
-                        android:title="Thực đơn"
+                        android:title="Loại món"
                         android:icon="@drawable/ic_baseline_restaurant_menu_24"/>
 
                     <item

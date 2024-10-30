@@ -28,6 +28,7 @@
         <FrameLayout
             android:id="@+id/contentView"
             android:layout_width="match_parent"
+            android:background="@drawable/nen_na"
             android:layout_height="0dp"
             android:layout_weight="1">
         </FrameLayout>
@@ -37,9 +38,9 @@
             android:layout_height="wrap_content"
             android:background="#CC9966"
             app:menu="@menu/menu_bottomnavigation"
-            app:itemIconTint="@color/white"
+            app:itemIconTint="@color/black"
             app:itemIconSize="25dp"
-            app:itemTextColor="@color/white"
+            app:itemTextColor="@color/black"
             app:labelVisibilityMode="labeled" >
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -49,7 +50,7 @@
         android:id="@+id/navigation_view_trangchu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightwhite"
+        android:background="@drawable/nen_na"
         android:theme="@style/navigationTheme"
         android:layout_gravity="start"
         app:headerLayout="@layout/menu_navigation_header"

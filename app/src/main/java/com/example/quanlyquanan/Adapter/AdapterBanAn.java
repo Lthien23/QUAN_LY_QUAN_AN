@@ -80,7 +80,6 @@ public class AdapterBanAn extends BaseAdapter implements View.OnClickListener{
             viewHolder.imgBanAn = (ImageView) view.findViewById(R.id.img_customtable_BanAn);
             viewHolder.imgGoiMon = (ImageView) view.findViewById(R.id.img_customtable_GoiMon);
             viewHolder.imgThanhToan = (ImageView) view.findViewById(R.id.img_customtable_ThanhToan);
-            viewHolder.imgAnNut = (ImageView) view.findViewById(R.id.img_customtable_AnNut);
             viewHolder.txtTenBanAn = (TextView)view.findViewById(R.id.txt_customtable_TenBanAn);
 
             view.setTag(viewHolder);
@@ -110,7 +109,6 @@ public class AdapterBanAn extends BaseAdapter implements View.OnClickListener{
         viewHolder.imgBanAn.setOnClickListener(this);
         viewHolder.imgGoiMon.setOnClickListener(this);
         viewHolder.imgThanhToan.setOnClickListener(this);
-        viewHolder.imgAnNut.setOnClickListener(this);
 
         return view;
     }
@@ -134,11 +132,6 @@ public class AdapterBanAn extends BaseAdapter implements View.OnClickListener{
                 banAnList.get(vitri).setDuocChon(true);
                 HienThiButton();
                 break;
-
-            case R.id.img_customtable_AnNut:
-                AnButton();
-                break;
-
             case R.id.img_customtable_GoiMon:
                 Intent getIHome = ((TrangChuActivity)context).getIntent();
                 int manv = getIHome.getIntExtra("manv",0);
@@ -183,16 +176,14 @@ public class AdapterBanAn extends BaseAdapter implements View.OnClickListener{
     private void HienThiButton(){
         viewHolder.imgGoiMon.setVisibility(View.VISIBLE);
         viewHolder.imgThanhToan.setVisibility(View.VISIBLE);
-        viewHolder.imgAnNut.setVisibility(View.VISIBLE);
     }
     private void AnButton(){
         viewHolder.imgGoiMon.setVisibility(View.INVISIBLE);
         viewHolder.imgThanhToan.setVisibility(View.INVISIBLE);
-        viewHolder.imgAnNut.setVisibility(View.INVISIBLE);
     }
 
     public class ViewHolder{
-        ImageView imgBanAn, imgGoiMon, imgThanhToan, imgAnNut;
+        ImageView imgBanAn, imgGoiMon, imgThanhToan;
         TextView txtTenBanAn;
     }
 }

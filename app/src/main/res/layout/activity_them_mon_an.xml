@@ -8,7 +8,7 @@
     tools:context=".ThemMonAnActivity"
     android:orientation="vertical"
     android:padding="30dp"
-    android:background="@color/white"
+    android:background="@drawable/nen_na"
     >
     <ImageView
         android:id="@+id/img_addmenu_back"
@@ -42,7 +42,7 @@
             android:layout_height="190dp"
             android:layout_marginBottom="15dp"
             android:scaleType="fitXY"
-            android:src="@drawable/drinkfood" />
+            android:src="@drawable/monanminhhoa" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtl_addmenu_TenMon"

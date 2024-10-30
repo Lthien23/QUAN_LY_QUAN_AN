@@ -36,7 +36,6 @@ public class DangKy1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_dang_ky1);
 
-        //region lấy đối tượng view
         IMG_signup_back = (ImageView)findViewById(id.img_signup_back);
         BTN_signup_next = (Button)findViewById(id.btn_signup_next);
         TXT_signup_title = (TextView)findViewById(id.txt_signup_title);
@@ -45,7 +44,6 @@ public class DangKy1Activity extends AppCompatActivity {
         TXTL_signup_Email = (TextInputLayout)findViewById(id.txtl_signup_Email);
         TXTL_signup_SDT = (TextInputLayout)findViewById(id.txtl_signup_SDT);
         TXTL_signup_MatKhau = (TextInputLayout)findViewById(id.txtl_signup_MatKhau);
-        //endregion
 
         BTN_signup_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,5 +182,4 @@ public class DangKy1Activity extends AppCompatActivity {
             return true;
         }
     }
-    //endregion
 }

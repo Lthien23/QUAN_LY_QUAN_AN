@@ -78,7 +78,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
 
         //region Lấy đối tượng view
         IMG_addmenu_ThemHinh = (ImageView)findViewById(R.id.img_addmenu_ThemHinh);
-        IMG_addmenu_ThemHinh.setTag(R.drawable.drinkfood);
+        IMG_addmenu_ThemHinh.setTag(R.drawable.ic_baseline_add_circle_24);
         IMG_addmenu_back = (ImageView)findViewById(R.id.img_addmenu_back);
         TXTL_addmenu_TenMon = (TextInputLayout)findViewById(R.id.txtl_addmenu_TenMon);
         TXTL_addmenu_GiaTien = (TextInputLayout)findViewById(R.id.txtl_addmenu_GiaTien);
