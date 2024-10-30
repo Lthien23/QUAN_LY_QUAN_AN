@@ -106,15 +106,6 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
                 />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quên mật khẩu"
-                android:background="@color/white"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                />
         </RelativeLayout>
 
         <Button
