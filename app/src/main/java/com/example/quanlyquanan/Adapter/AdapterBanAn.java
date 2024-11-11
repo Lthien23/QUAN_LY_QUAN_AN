@@ -150,7 +150,7 @@ public class AdapterBanAn extends BaseAdapter implements View.OnClickListener{
                     banAnDAO.CapNhatTinhTrangBan(maban,"true");
                     if(ktra == 0){ Toast.makeText(context,context.getResources().getString(R.string.add_failed),Toast.LENGTH_SHORT).show(); }
                 }
-                //chuyển qua trang category
+                //chuyển qua trang Loai mon
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 LoaiMonFragment displayCategoryFragment = new LoaiMonFragment();
 

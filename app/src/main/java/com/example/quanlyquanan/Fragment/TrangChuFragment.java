@@ -115,7 +115,6 @@ public class TrangChuFragment extends Fragment implements View.OnClickListener {
                 tranDisplayCategory.addToBackStack(null);
                 tranDisplayCategory.commit();
                 navigationView.setCheckedItem(R.id.nav_category);
-
                 break;
 
         }

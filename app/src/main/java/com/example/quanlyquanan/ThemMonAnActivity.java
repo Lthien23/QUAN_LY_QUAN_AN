@@ -176,7 +176,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
                     chucnang = "themmon";
                 }
 
-                //Thêm, sửa món dựa theo obj loaimonDTO
+                //Thêm, sửa món dựa theo obj loaimon
                 Intent intent = new Intent();
                 intent.putExtra("ktra",ktra);
                 intent.putExtra("chucnang",chucnang);

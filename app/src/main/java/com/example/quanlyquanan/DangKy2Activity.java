@@ -88,7 +88,7 @@ public class DangKy2Activity extends AppCompatActivity {
                     nhanVien.setMAQUYEN(2);
                 }
 
-                //Thêm nv dựa theo obj nhanvienDTO
+                //Thêm nv dựa theo obj nhanvien
                 long ktra = nhanVienDAO.ThemNhanVien(nhanVien);
                 if(ktra != 0){
                     Toast.makeText(DangKy2Activity.this,getResources().getString(R.string.add_sucessful),Toast.LENGTH_SHORT).show();

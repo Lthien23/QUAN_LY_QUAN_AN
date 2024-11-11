@@ -134,7 +134,7 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
                     chucnang = "themloai";
                 }
 
-                //Thêm, sửa loại dựa theo obj loaimonDTO
+                //Thêm, sửa loại dựa theo obj loaimon
                 Intent intent = new Intent();
                 intent.putExtra("ktra",ktra);
                 intent.putExtra("chucnang",chucnang);

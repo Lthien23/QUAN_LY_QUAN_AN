@@ -39,7 +39,7 @@ public class BanAnFragment extends Fragment {
     BanAnDAO banAnDAO;
     AdapterBanAn adapterBanAn;
 
-    //Dùng activity result (activityforresult ko hổ trợ nữa) để nhận data gửi từ activity addtable
+    //Dùng activity result để nhận data gửi từ activity them ban
     ActivityResultLauncher<Intent> resultLauncherAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

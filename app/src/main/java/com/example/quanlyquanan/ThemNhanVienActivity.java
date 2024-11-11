@@ -143,7 +143,7 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                 ngaySinh = DT_addstaff_NgaySinh.getDayOfMonth() + "/" + (DT_addstaff_NgaySinh.getMonth() + 1)
                         +"/"+DT_addstaff_NgaySinh.getYear();
 
-                //truyền dữ liệu vào obj nhanvienDTO
+                //truyền dữ liệu vào obj nhanvien
                 NhanVien nhanVien = new NhanVien();
                 nhanVien.setHOTENNV(hoTen);
                 nhanVien.setTENDN(tenDN);
@@ -161,7 +161,7 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                     ktra = nhanVienDAO.ThemNhanVien(nhanVien);
                     chucnang = "themnv";
                 }
-                //Thêm, sửa nv dựa theo obj nhanvienDTO
+                //Thêm, sửa nv dựa theo obj nhanvien
                 Intent intent = new Intent();
                 intent.putExtra("ketquaktra",ktra);
                 intent.putExtra("chucnang",chucnang);

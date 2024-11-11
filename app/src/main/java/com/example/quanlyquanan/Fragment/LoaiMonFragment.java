@@ -47,6 +47,7 @@ public class LoaiMonFragment extends Fragment {
     FragmentManager fragmentManager;
     int maban;
 
+    //Dùng activity result để nhận data gửi từ activity loai mon
     ActivityResultLauncher<Intent> resultLauncherCategory = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
