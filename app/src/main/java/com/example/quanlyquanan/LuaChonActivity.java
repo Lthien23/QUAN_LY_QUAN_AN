@@ -24,7 +24,7 @@ public class LuaChonActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),DangNhapActivity.class);
 
         Pair[] pairs = new Pair[1];
-        pairs[0] = new Pair<View, String>(findViewById(R.id.btn_login),"transition_login");
+        pairs[0] = new Pair<View, String>(findViewById(R.id.btn_dangnhap),"transition_login");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LuaChonActivity.this,pairs);
@@ -39,7 +39,7 @@ public class LuaChonActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(getApplicationContext(),DangKy1Activity.class);
         Pair[] pairs = new Pair[1];
-        pairs[0] = new Pair<View, String>(findViewById(R.id.btn_signup),"transition_signup");
+        pairs[0] = new Pair<View, String>(findViewById(R.id.btn_dangky),"transition_signup");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LuaChonActivity.this,pairs);
             startActivity(intent,options.toBundle());

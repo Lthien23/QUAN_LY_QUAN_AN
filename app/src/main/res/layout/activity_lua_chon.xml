@@ -52,14 +52,14 @@
         >
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_dangnhap"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:text="@string/login"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:backgroundTint="@color/nau"
             android:onClick="callLoginFromWel"
             android:transitionName="transition_login"
@@ -67,14 +67,14 @@
             />
 
         <Button
-            android:id="@+id/btn_signup"
+            android:id="@+id/btn_dangky"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:text="@string/register"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:backgroundTint="@color/nau"
             android:onClick="callSignUpFromWel"
             android:transitionName="transition_signup"/>

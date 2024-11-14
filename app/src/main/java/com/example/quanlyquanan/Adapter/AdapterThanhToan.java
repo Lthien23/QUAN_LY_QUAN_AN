@@ -52,10 +52,10 @@ public class AdapterThanhToan extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout,parent,false);
 
-            viewHolder.img_custompayment_HinhMon = (CircleImageView)view.findViewById(R.id.img_custompayment_HinhMon);
-            viewHolder.txt_custompayment_TenMon = (TextView)view.findViewById(R.id.txt_custompayment_TenMon);
-            viewHolder.txt_custompayment_SoLuong = (TextView)view.findViewById(R.id.txt_custompayment_SoLuong);
-            viewHolder.txt_custompayment_GiaTien = (TextView)view.findViewById(R.id.txt_custompayment_GiaTien);
+            viewHolder.img_thanhtoan_HinhMon = (CircleImageView)view.findViewById(R.id.img_thanhtoan_HinhMon);
+            viewHolder.txt_thanhtoan_TenMon = (TextView)view.findViewById(R.id.txt_thanhtoan_TenMon);
+            viewHolder.txt_thanhtoan_SoLuong = (TextView)view.findViewById(R.id.txt_thanhtoan_SoLuong);
+            viewHolder.txt_thanhtoan_GiaTien = (TextView)view.findViewById(R.id.txt_thanhtoan_GiaTien);
 
             view.setTag(viewHolder);
         }else {
@@ -63,19 +63,19 @@ public class AdapterThanhToan extends BaseAdapter {
         }
         ThanhToan thanhToan = thanhToanList.get(position);
 
-        viewHolder.txt_custompayment_TenMon.setText(thanhToan.getTenMon());
-        viewHolder.txt_custompayment_SoLuong.setText(String.valueOf(thanhToan.getSoLuong()));
-        viewHolder.txt_custompayment_GiaTien.setText(String.valueOf(thanhToan.getGiaTien())+" đ");
+        viewHolder.txt_thanhtoan_TenMon.setText(thanhToan.getTenMon());
+        viewHolder.txt_thanhtoan_SoLuong.setText(String.valueOf(thanhToan.getSoLuong()));
+        viewHolder.txt_thanhtoan_GiaTien.setText(String.valueOf(thanhToan.getGiaTien())+" đ");
 
         byte[] paymentimg = thanhToan.getHinhAnh();
         Bitmap bitmap = BitmapFactory.decodeByteArray(paymentimg,0,paymentimg.length);
-        viewHolder.img_custompayment_HinhMon.setImageBitmap(bitmap);
+        viewHolder.img_thanhtoan_HinhMon.setImageBitmap(bitmap);
 
         return view;
     }
 
     public class ViewHolder{
-        CircleImageView img_custompayment_HinhMon;
-        TextView txt_custompayment_TenMon, txt_custompayment_SoLuong, txt_custompayment_GiaTien;
+        CircleImageView img_thanhtoan_HinhMon;
+        TextView txt_thanhtoan_TenMon, txt_thanhtoan_SoLuong, txt_thanhtoan_GiaTien;
     }
 }

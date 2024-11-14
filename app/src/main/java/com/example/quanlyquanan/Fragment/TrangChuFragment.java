@@ -37,8 +37,8 @@ import java.util.List;
 
 public class TrangChuFragment extends Fragment implements View.OnClickListener {
 
-    RecyclerView rcv_displayhome_LoaiMon, rcv_displayhome_DonTrongNgay;
-    TextView txt_displayhome_ViewAllCategory, txt_displayhome_ViewAllStatistic;
+    RecyclerView rcv_displayhome_LoaiMon;
+    TextView txt_trangchuFragment_Xemchitietloaimon;
     LoaiMonDAO loaiMonDAO;
     DonDatDAO donDatDAO;
     List<LoaiMon> loaiMonList;
@@ -53,10 +53,8 @@ public class TrangChuFragment extends Fragment implements View.OnClickListener {
         setHasOptionsMenu(true);
 
         //region Lấy dối tượng view
-        rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_displayhome_LoaiMon);
-        rcv_displayhome_DonTrongNgay = (RecyclerView)view.findViewById(R.id.rcv_displayhome_DonTrongNgay);
-        txt_displayhome_ViewAllCategory = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllCategory);
-        txt_displayhome_ViewAllStatistic = (TextView) view.findViewById(R.id.txt_displayhome_ViewAllStatistic);
+        rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_trangchuFragment_LoaiMon);
+        txt_trangchuFragment_Xemchitietloaimon = (TextView) view.findViewById(R.id.txt_trangchuFragment_Xemchitietloaimon);
         //endregion
 
         //khởi tạo kết nối
@@ -64,10 +62,8 @@ public class TrangChuFragment extends Fragment implements View.OnClickListener {
         donDatDAO = new DonDatDAO(getActivity());
 
         HienThiDSLoai();
-        HienThiDonTrongNgay();
 
-        txt_displayhome_ViewAllCategory.setOnClickListener(this);
-        txt_displayhome_ViewAllStatistic.setOnClickListener(this);
+        txt_trangchuFragment_Xemchitietloaimon.setOnClickListener(this);
 
         return view;
     }
@@ -81,40 +77,17 @@ public class TrangChuFragment extends Fragment implements View.OnClickListener {
         adapterRecycleViewLoaiMon.notifyDataSetChanged();
     }
 
-    private void HienThiDonTrongNgay(){
-        rcv_displayhome_DonTrongNgay.setHasFixedSize(true);
-        rcv_displayhome_DonTrongNgay.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String ngaydat= dateFormat.format(calendar.getTime());
-
-        donDatS = donDatDAO.LayDSDonDatNgay(ngaydat);
-        adapterRecycleViewThongKe = new AdapterRecycleViewThongKe(getActivity(),R.layout.thongke,donDatS);
-        rcv_displayhome_DonTrongNgay.setAdapter(adapterRecycleViewThongKe);
-        adapterRecycleViewThongKe.notifyDataSetChanged();
-    }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
 
         NavigationView navigationView = (NavigationView)getActivity().findViewById(R.id.navigation_view_trangchu);
         switch (id){
-
-            case R.id.txt_displayhome_ViewAllStatistic:
-                FragmentTransaction tranDisplayStatistic = getActivity().getSupportFragmentManager().beginTransaction();
-                tranDisplayStatistic.replace(R.id.contentView,new ThongKeFragment());
-                tranDisplayStatistic.addToBackStack(null);
-                tranDisplayStatistic.commit();
-                navigationView.setCheckedItem(R.id.nav_statistic);
-
-                break;
-            case R.id.txt_displayhome_ViewAllCategory:
+            case R.id.txt_trangchuFragment_Xemchitietloaimon:
                 FragmentTransaction tranDisplayCategory = getActivity().getSupportFragmentManager().beginTransaction();
                 tranDisplayCategory.replace(R.id.contentView,new LoaiMonFragment());
                 tranDisplayCategory.addToBackStack(null);
                 tranDisplayCategory.commit();
-                navigationView.setCheckedItem(R.id.nav_category);
                 break;
 
         }

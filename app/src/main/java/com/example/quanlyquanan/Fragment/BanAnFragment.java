@@ -34,7 +34,7 @@ import java.util.List;
 
 public class BanAnFragment extends Fragment {
 
-    GridView GVDisplayTable;
+    GridView gvbananFragment;
     List<BanAn> banAnDTOList;
     BanAnDAO banAnDAO;
     AdapterBanAn adapterBanAn;
@@ -80,12 +80,12 @@ public class BanAnFragment extends Fragment {
         setHasOptionsMenu(true);
         ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý bàn");
 
-        GVDisplayTable = (GridView)view.findViewById(R.id.gvDisplayTable);
+        gvbananFragment = (GridView)view.findViewById(R.id.gvbananFragment);
         banAnDAO = new BanAnDAO(getActivity());
 
         HienThiDSBan();
 
-        registerForContextMenu(GVDisplayTable);
+        registerForContextMenu(gvbananFragment);
         return view;
     }
 
@@ -154,7 +154,7 @@ public class BanAnFragment extends Fragment {
     private void HienThiDSBan(){
         banAnDTOList = banAnDAO.LayTatCaBanAn();
         adapterBanAn = new AdapterBanAn(getActivity(),R.layout.banan,banAnDTOList);
-        GVDisplayTable.setAdapter(adapterBanAn);
+        gvbananFragment.setAdapter(adapterBanAn);
         adapterBanAn.notifyDataSetChanged();
     }
 }

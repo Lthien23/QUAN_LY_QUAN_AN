@@ -30,13 +30,11 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                     ".{6,}" +                // at least 4 characters
                     "$");
 
-    ImageView IMG_addstaff_back;
-    TextView TXT_addstaff_title;
-    TextInputLayout TXTL_addstaff_HoVaTen, TXTL_addstaff_TenDN, TXTL_addstaff_Email, TXTL_addstaff_SDT, TXTL_addstaff_MatKhau;
-    RadioGroup RG_addstaff_GioiTinh,rg_addstaff_Quyen;
-    RadioButton RD_addstaff_Nam,RD_addstaff_Nu,RD_addstaff_Khac,rd_addstaff_QuanLy,rd_addstaff_NhanVien;
-    DatePicker DT_addstaff_NgaySinh;
-    Button BTN_addstaff_ThemNV;
+    TextInputLayout txtl_themnhanvienActivity_hoten, txtl_themnhanvienActivity_tendn, txtl_themnhanvienActivity_Email, txtl_themnhanvienActivity_SDT, txtl_themnhanvienActivity_matkhau;
+    RadioGroup rg_themnhanvienActivity_GioiTinh,rg_themnhanvienActivity_quyen;
+    RadioButton rd_themnhanvienActivity_Nam,rd_themnhanvienActivity_Nu,rd_themnhanvienActivity_Khac,rd_themnhanvienActivity_QuanLy,rd_themnhanvienActivity_NhanVien;
+    DatePicker dt_themnhanvienActivity_NgaySinh;
+    Button btn_themnhanvienActivity_ThemNV;
     NhanVienDAO nhanVienDAO;
     String hoTen,tenDN,eMail,sDT,matKhau,gioiTinh,ngaySinh;
     int manv = 0,quyen = 0;
@@ -48,22 +46,20 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_them_nhan_vien);
 
         //region Lấy đối tượng trong view
-        TXT_addstaff_title = (TextView)findViewById(R.id.txt_addstaff_title);
-        IMG_addstaff_back = (ImageView)findViewById(R.id.img_addstaff_back);
-        TXTL_addstaff_HoVaTen = (TextInputLayout)findViewById(R.id.txtl_addstaff_HoVaTen);
-        TXTL_addstaff_TenDN = (TextInputLayout)findViewById(R.id.txtl_addstaff_TenDN);
-        TXTL_addstaff_Email = (TextInputLayout)findViewById(R.id.txtl_addstaff_Email);
-        TXTL_addstaff_SDT = (TextInputLayout)findViewById(R.id.txtl_addstaff_SDT);
-        TXTL_addstaff_MatKhau = (TextInputLayout)findViewById(R.id.txtl_addstaff_MatKhau);
-        RG_addstaff_GioiTinh = (RadioGroup)findViewById(R.id.rg_addstaff_GioiTinh);
-        rg_addstaff_Quyen = (RadioGroup)findViewById(R.id.rg_addstaff_Quyen);
-        RD_addstaff_Nam = (RadioButton)findViewById(R.id.rd_addstaff_Nam);
-        RD_addstaff_Nu = (RadioButton)findViewById(R.id.rd_addstaff_Nu);
-        RD_addstaff_Khac = (RadioButton)findViewById(R.id.rd_addstaff_Khac);
-        rd_addstaff_QuanLy = (RadioButton)findViewById(R.id.rd_addstaff_QuanLy);
-        rd_addstaff_NhanVien = (RadioButton)findViewById(R.id.rd_addstaff_NhanVien);
-        DT_addstaff_NgaySinh = (DatePicker)findViewById(R.id.dt_addstaff_NgaySinh);
-        BTN_addstaff_ThemNV = (Button)findViewById(R.id.btn_addstaff_ThemNV);
+        txtl_themnhanvienActivity_hoten = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_hoten);
+        txtl_themnhanvienActivity_tendn = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_tendn);
+        txtl_themnhanvienActivity_Email = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_Email);
+        txtl_themnhanvienActivity_SDT = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_SDT);
+        txtl_themnhanvienActivity_matkhau = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_matkhau);
+        rg_themnhanvienActivity_GioiTinh = (RadioGroup)findViewById(R.id.rg_themnhanvienActivity_GioiTinh);
+        rg_themnhanvienActivity_quyen = (RadioGroup)findViewById(R.id.rg_themnhanvienActivity_quyen);
+        rd_themnhanvienActivity_Nam = (RadioButton)findViewById(R.id.rd_themnhanvienActivity_Nam);
+        rd_themnhanvienActivity_Nu = (RadioButton)findViewById(R.id.rd_themnhanvienActivity_Nu);
+        rd_themnhanvienActivity_Khac = (RadioButton)findViewById(R.id.rd_themnhanvienActivity_Khac);
+        rd_themnhanvienActivity_QuanLy = (RadioButton)findViewById(R.id.rd_themnhanvienActivity_QuanLy);
+        rd_themnhanvienActivity_NhanVien = (RadioButton)findViewById(R.id.rd_themnhanvienActivity_NhanVien);
+        dt_themnhanvienActivity_NgaySinh = (DatePicker)findViewById(R.id.dt_themnhanvienActivity_NgaySinh);
+        btn_themnhanvienActivity_ThemNV = (Button)findViewById(R.id.btn_themnhanvienActivity_ThemNV);
 
         //endregion
 
@@ -72,30 +68,29 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         //region Hiển thị trang sửa nếu được chọn từ context menu sửa
         manv = getIntent().getIntExtra("manv",0);   //lấy manv từ display staff
         if(manv != 0){
-            TXT_addstaff_title.setText("Sửa nhân viên");
             NhanVien nhanVien = nhanVienDAO.LayNVTheoMa(manv);
 
             //Hiển thị thông tin từ csdl
-            TXTL_addstaff_HoVaTen.getEditText().setText(nhanVien.getHOTENNV());
-            TXTL_addstaff_TenDN.getEditText().setText(nhanVien.getTENDN());
-            TXTL_addstaff_Email.getEditText().setText(nhanVien.getEMAIL());
-            TXTL_addstaff_SDT.getEditText().setText(nhanVien.getSDT());
-            TXTL_addstaff_MatKhau.getEditText().setText(nhanVien.getMATKHAU());
+            txtl_themnhanvienActivity_hoten.getEditText().setText(nhanVien.getHOTENNV());
+            txtl_themnhanvienActivity_tendn.getEditText().setText(nhanVien.getTENDN());
+            txtl_themnhanvienActivity_Email.getEditText().setText(nhanVien.getEMAIL());
+            txtl_themnhanvienActivity_SDT.getEditText().setText(nhanVien.getSDT());
+            txtl_themnhanvienActivity_matkhau.getEditText().setText(nhanVien.getMATKHAU());
 
             //Hiển thị giới tính từ csdl
             String gioitinh = nhanVien.getGIOITINH();
             if(gioitinh.equals("Nam")){
-                RD_addstaff_Nam.setChecked(true);
+                rd_themnhanvienActivity_Nam.setChecked(true);
             }else if (gioitinh.equals("Nữ")){
-                RD_addstaff_Nu.setChecked(true);
+                rd_themnhanvienActivity_Nu.setChecked(true);
             }else {
-                RD_addstaff_Khac.setChecked(true);
+                rd_themnhanvienActivity_Khac.setChecked(true);
             }
 
             if(nhanVien.getMAQUYEN() == 1){
-                rd_addstaff_QuanLy.setChecked(true);
+                rd_themnhanvienActivity_QuanLy.setChecked(true);
             }else {
-                rd_addstaff_NhanVien.setChecked(true);
+                rd_themnhanvienActivity_NhanVien.setChecked(true);
             }
 
             //Hiển thị ngày sinh từ csdl
@@ -104,13 +99,12 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
             int day = Integer.parseInt(items[0]);
             int month = Integer.parseInt(items[1]) - 1;
             int year = Integer.parseInt(items[2]);
-            DT_addstaff_NgaySinh.updateDate(year,month,day);
-            BTN_addstaff_ThemNV.setText("Sửa nhân viên");
+            dt_themnhanvienActivity_NgaySinh.updateDate(year,month,day);
+            btn_themnhanvienActivity_ThemNV.setText("Sửa nhân viên");
         }
         //endregion
 
-        BTN_addstaff_ThemNV.setOnClickListener(this);
-        IMG_addstaff_back.setOnClickListener(this);
+        btn_themnhanvienActivity_ThemNV.setOnClickListener(this);
     }
 
     @Override
@@ -118,30 +112,30 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         int id = v.getId();
         String chucnang;
         switch (id){
-            case R.id.btn_addstaff_ThemNV:
+            case R.id.btn_themnhanvienActivity_ThemNV:
                 if( !validateAge() | !validateEmail() | !validateFullName() | !validateGender() | !validatePassWord() |
                         !validatePermission() | !validatePhone() | !validateUserName()){
                     return;
                 }
                 //Lấy dữ liệu từ view
-                hoTen = TXTL_addstaff_HoVaTen.getEditText().getText().toString();
-                tenDN = TXTL_addstaff_TenDN.getEditText().getText().toString();
-                eMail = TXTL_addstaff_Email.getEditText().getText().toString();
-                sDT = TXTL_addstaff_SDT.getEditText().getText().toString();
-                matKhau = TXTL_addstaff_MatKhau.getEditText().getText().toString();
+                hoTen = txtl_themnhanvienActivity_hoten.getEditText().getText().toString();
+                tenDN = txtl_themnhanvienActivity_tendn.getEditText().getText().toString();
+                eMail = txtl_themnhanvienActivity_Email.getEditText().getText().toString();
+                sDT = txtl_themnhanvienActivity_SDT.getEditText().getText().toString();
+                matKhau = txtl_themnhanvienActivity_matkhau.getEditText().getText().toString();
 
-                switch (RG_addstaff_GioiTinh.getCheckedRadioButtonId()){
-                    case R.id.rd_addstaff_Nam: gioiTinh = "Nam"; break;
-                    case R.id.rd_addstaff_Nu: gioiTinh = "Nữ"; break;
-                    case R.id.rd_addstaff_Khac: gioiTinh = "Khác"; break;
+                switch (rg_themnhanvienActivity_GioiTinh.getCheckedRadioButtonId()){
+                    case R.id.rd_themnhanvienActivity_Nam: gioiTinh = "Nam"; break;
+                    case R.id.rd_themnhanvienActivity_Nu: gioiTinh = "Nữ"; break;
+                    case R.id.rd_themnhanvienActivity_Khac: gioiTinh = "Khác"; break;
                 }
-                switch (rg_addstaff_Quyen.getCheckedRadioButtonId()){
-                    case R.id.rd_addstaff_QuanLy: quyen = 1; break;
-                    case R.id.rd_addstaff_NhanVien: quyen = 2; break;
+                switch (rg_themnhanvienActivity_quyen.getCheckedRadioButtonId()){
+                    case R.id.rd_themnhanvienActivity_QuanLy: quyen = 1; break;
+                    case R.id.rd_themnhanvienActivity_NhanVien: quyen = 2; break;
                 }
 
-                ngaySinh = DT_addstaff_NgaySinh.getDayOfMonth() + "/" + (DT_addstaff_NgaySinh.getMonth() + 1)
-                        +"/"+DT_addstaff_NgaySinh.getYear();
+                ngaySinh = dt_themnhanvienActivity_NgaySinh.getDayOfMonth() + "/" + (dt_themnhanvienActivity_NgaySinh.getMonth() + 1)
+                        +"/"+dt_themnhanvienActivity_NgaySinh.getYear();
 
                 //truyền dữ liệu vào obj nhanvien
                 NhanVien nhanVien = new NhanVien();
@@ -168,104 +162,99 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                 setResult(RESULT_OK,intent);
                 finish();
                 break;
-
-            case R.id.img_addstaff_back:
-                finish();
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                break;
         }
     }
 
     //region validate fields
     private boolean validateFullName(){
-        String val = TXTL_addstaff_HoVaTen.getEditText().getText().toString().trim();
+        String val = txtl_themnhanvienActivity_hoten.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_addstaff_HoVaTen.setError(getResources().getString(R.string.not_empty));
+            txtl_themnhanvienActivity_hoten.setError(getResources().getString(R.string.not_empty));
             return false;
         }else {
-            TXTL_addstaff_HoVaTen.setError(null);
-            TXTL_addstaff_HoVaTen.setErrorEnabled(false);
+            txtl_themnhanvienActivity_hoten.setError(null);
+            txtl_themnhanvienActivity_hoten.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateUserName(){
-        String val = TXTL_addstaff_TenDN.getEditText().getText().toString().trim();
+        String val = txtl_themnhanvienActivity_tendn.getEditText().getText().toString().trim();
         String checkspaces = "\\A\\w{1,50}\\z";
 
         if(val.isEmpty()){
-            TXTL_addstaff_TenDN.setError(getResources().getString(R.string.not_empty));
+            txtl_themnhanvienActivity_tendn.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(val.length()>50){
-            TXTL_addstaff_TenDN.setError("Phải nhỏ hơn 50 ký tự");
+            txtl_themnhanvienActivity_tendn.setError("Phải nhỏ hơn 50 ký tự");
             return false;
         }else if(!val.matches(checkspaces)){
-            TXTL_addstaff_TenDN.setError("Không được cách chữ!");
+            txtl_themnhanvienActivity_tendn.setError("Không được cách chữ!");
             return false;
         }
         else {
-            TXTL_addstaff_TenDN.setError(null);
-            TXTL_addstaff_TenDN.setErrorEnabled(false);
+            txtl_themnhanvienActivity_tendn.setError(null);
+            txtl_themnhanvienActivity_tendn.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateEmail(){
-        String val = TXTL_addstaff_Email.getEditText().getText().toString().trim();
+        String val = txtl_themnhanvienActivity_Email.getEditText().getText().toString().trim();
         String checkspaces = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
 
         if(val.isEmpty()){
-            TXTL_addstaff_Email.setError(getResources().getString(R.string.not_empty));
+            txtl_themnhanvienActivity_Email.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(!val.matches(checkspaces)){
-            TXTL_addstaff_Email.setError("Email không hợp lệ!");
+            txtl_themnhanvienActivity_Email.setError("Email không hợp lệ!");
             return false;
         }
         else {
-            TXTL_addstaff_Email.setError(null);
-            TXTL_addstaff_Email.setErrorEnabled(false);
+            txtl_themnhanvienActivity_Email.setError(null);
+            txtl_themnhanvienActivity_Email.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePhone(){
-        String val = TXTL_addstaff_SDT.getEditText().getText().toString().trim();
+        String val = txtl_themnhanvienActivity_SDT.getEditText().getText().toString().trim();
 
 
         if(val.isEmpty()){
-            TXTL_addstaff_SDT.setError(getResources().getString(R.string.not_empty));
+            txtl_themnhanvienActivity_SDT.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(val.length() != 10){
-            TXTL_addstaff_SDT.setError("Số điện thoại không hợp lệ!");
+            txtl_themnhanvienActivity_SDT.setError("Số điện thoại không hợp lệ!");
             return false;
         }
         else {
-            TXTL_addstaff_SDT.setError(null);
-            TXTL_addstaff_SDT.setErrorEnabled(false);
+            txtl_themnhanvienActivity_SDT.setError(null);
+            txtl_themnhanvienActivity_SDT.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePassWord(){
-        String val = TXTL_addstaff_MatKhau.getEditText().getText().toString().trim();
+        String val = txtl_themnhanvienActivity_matkhau.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_addstaff_MatKhau.setError(getResources().getString(R.string.not_empty));
+            txtl_themnhanvienActivity_matkhau.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(!PASSWORD_PATTERN.matcher(val).matches()){
-            TXTL_addstaff_MatKhau.setError("Mật khẩu ít nhất 6 ký tự!");
+            txtl_themnhanvienActivity_matkhau.setError("Mật khẩu ít nhất 6 ký tự!");
             return false;
         }
         else {
-            TXTL_addstaff_MatKhau.setError(null);
-            TXTL_addstaff_MatKhau.setErrorEnabled(false);
+            txtl_themnhanvienActivity_matkhau.setError(null);
+            txtl_themnhanvienActivity_matkhau.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateGender(){
-        if(RG_addstaff_GioiTinh.getCheckedRadioButtonId() == -1){
+        if(rg_themnhanvienActivity_GioiTinh.getCheckedRadioButtonId() == -1){
             Toast.makeText(this,"Hãy chọn giới tính",Toast.LENGTH_SHORT).show();
             return false;
         }else {
@@ -274,7 +263,7 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
     }
 
     private boolean validatePermission(){
-        if(rg_addstaff_Quyen.getCheckedRadioButtonId() == -1){
+        if(rg_themnhanvienActivity_quyen.getCheckedRadioButtonId() == -1){
             Toast.makeText(this,"Hãy chọn quyền",Toast.LENGTH_SHORT).show();
             return false;
         }else {
@@ -284,7 +273,7 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
 
     private boolean validateAge(){
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int userAge = DT_addstaff_NgaySinh.getYear();
+        int userAge = dt_themnhanvienActivity_NgaySinh.getYear();
         int isAgeValid = currentYear - userAge;
 
         if(isAgeValid < 10){

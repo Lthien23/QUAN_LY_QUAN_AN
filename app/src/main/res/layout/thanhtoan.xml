@@ -15,7 +15,7 @@
         android:weightSum="6"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_custompayment_HinhMon"
+            android:id="@+id/img_thanhtoan_HinhMon"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="70dp"
@@ -23,7 +23,7 @@
             />
 
         <TextView
-            android:id="@+id/txt_custompayment_TenMon"
+            android:id="@+id/txt_thanhtoan_TenMon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Nom thai"
@@ -34,7 +34,7 @@
             android:textColor="@color/black"
             />
         <TextView
-            android:id="@+id/txt_custompayment_SoLuong"
+            android:id="@+id/txt_thanhtoan_SoLuong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -42,13 +42,13 @@
             android:text="15"
             android:gravity="center"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/txt_custompayment_GiaTien"
-            android:layout_toLeftOf="@id/txt_custompayment_GiaTien"
+            android:layout_toStartOf="@id/txt_thanhtoan_GiaTien"
+            android:layout_toLeftOf="@id/txt_thanhtoan_GiaTien"
             android:textSize="16sp"
             />
 
         <TextView
-            android:id="@+id/txt_custompayment_GiaTien"
+            android:id="@+id/txt_thanhtoan_GiaTien"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"

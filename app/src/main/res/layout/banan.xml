@@ -1,48 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:layout_marginBottom="20dp">
+    android:background="@color/nau"
+    android:layout_margin="10dp">
 
+    <!-- Ảnh bàn ăn -->
+    <ImageView
+        android:id="@+id/img_banan_BanAn"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:src="@drawable/img"
+        android:background="@color/nau" />
+
+    <!-- Tên bàn ăn -->
     <TextView
-        android:id="@+id/txt_customtable_TenBanAn"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_banan_TenBanAn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        />
+        android:textColor="@color/white"
+        android:layout_toRightOf="@id/img_banan_BanAn"
+        android:layout_alignTop="@id/img_banan_BanAn"
+        android:layout_marginStart="16dp" />
+
     <ImageView
-        android:id="@+id/img_customtable_BanAn"
-        android:layout_width="140dp"
-        android:layout_height="120dp"
-        android:src="@drawable/ic_baseline_event_seat_40"
-        android:layout_below="@+id/txt_customtable_TenBanAn"
-        android:background="@color/nau"
-        />
-    <ImageView
-        android:id="@+id/img_customtable_GoiMon"
+        android:id="@+id/img_banan_GoiMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_fastfood_24"
-        android:background="@color/black"
+        android:layout_alignBottom="@id/img_banan_BanAn"
+        android:layout_marginLeft="-84dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_toRightOf="@id/txt_banan_TenBanAn"
         android:padding="5dp"
-        android:layout_below="@id/img_customtable_BanAn"
-        android:layout_marginLeft="6dp"
-        android:visibility="invisible"
-        />
+        android:src="@drawable/ic_baseline_fastfood_24" />
+
     <ImageView
-        android:id="@+id/img_customtable_ThanhToan"
+        android:id="@+id/img_banan_ThanhToan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_payments_24"
-        android:background="@color/black"
         android:padding="5dp"
-        android:layout_below="@id/img_customtable_BanAn"
-        android:layout_toRightOf="@id/img_customtable_GoiMon"
-        android:layout_marginLeft="12dp"
-        android:visibility="invisible"
-        />
+        android:layout_alignBottom="@id/img_banan_GoiMon"
+        android:layout_toRightOf="@id/img_banan_GoiMon"
+        android:layout_marginStart="8dp" />
+
 </RelativeLayout>

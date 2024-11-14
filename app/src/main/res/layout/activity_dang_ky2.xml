@@ -15,7 +15,7 @@
         android:orientation="vertical"
         >
         <ImageView
-            android:id="@+id/img_signup_back"
+            android:id="@+id/img_dangky2_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back_24"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             >
             <TextView
-                android:id="@+id/txt_signup2nd_title"
+                android:id="@+id/txt_dangky2_tieude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_acc"
@@ -41,7 +41,7 @@
                 />
 
             <TextView
-                android:id="@+id/txt_signup2nd_text"
+                android:id="@+id/txt_dangky2_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -52,7 +52,7 @@
                 android:padding="25dp"
                 android:text="2/2"
                 android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 />
 
@@ -72,7 +72,7 @@
                 />
 
             <RadioGroup
-                android:id="@+id/rg_signup_GioiTinh"
+                android:id="@+id/rg_dangki2_GioiTinh"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -80,21 +80,21 @@
                 >
 
                 <RadioButton
-                    android:id="@+id/rd_signup_Nam"
+                    android:id="@+id/rd_dangki2_Nam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nam"
                     android:layout_marginRight="10dp"/>
 
                 <RadioButton
-                    android:id="@+id/rd_signup_Nu"
+                    android:id="@+id/rd_dangky2_Nu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nữ"
                     android:layout_marginRight="10dp"/>
 
                 <RadioButton
-                    android:id="@+id/rd_signup_Khac"
+                    android:id="@+id/rd_dangky2_Khac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Khác" />
@@ -115,7 +115,7 @@
                 android:textSize="18sp"
                 />
             <DatePicker
-                android:id="@+id/dt_signup_NgaySinh"
+                android:id="@+id/dt_dangky2_ngaysinh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
@@ -127,7 +127,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_signup_next"
+            android:id="@+id/btn_dangky2_tieptheo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -135,7 +135,7 @@
             android:backgroundTint="@color/nau"
             android:elevation="5dp"
             android:text="@string/btn_complete"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:backgroundTint="@color/nau" />
     </LinearLayout>
 

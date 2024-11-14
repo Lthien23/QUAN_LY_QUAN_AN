@@ -53,11 +53,11 @@ public class AdapterNhanVien extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout,parent,false);
 
-            viewHolder.img_customstaff_HinhNV = (ImageView)view.findViewById(R.id.img_customstaff_HinhNV);
-            viewHolder.txt_customstaff_TenNV = (TextView)view.findViewById(R.id.txt_customstaff_TenNV);
-            viewHolder.txt_customstaff_TenQuyen = (TextView)view.findViewById(R.id.txt_customstaff_TenQuyen);
-            viewHolder.txt_customstaff_SDT = (TextView)view.findViewById(R.id.txt_customstaff_SDT);
-            viewHolder.txt_customstaff_Email = (TextView)view.findViewById(R.id.txt_customstaff_Email);
+            viewHolder.img_nhanvien_HinhNV = (ImageView)view.findViewById(R.id.img_nhanvien_HinhNV);
+            viewHolder.txt_nhanvien_TenNV = (TextView)view.findViewById(R.id.txt_nhanvien_TenNV);
+            viewHolder.txt_nhanvien_TenQuyen = (TextView)view.findViewById(R.id.txt_nhanvien_TenQuyen);
+            viewHolder.txt_nhanvien_SDT = (TextView)view.findViewById(R.id.txt_nhanvien_SDT);
+            viewHolder.txt_nhanvien_tendn = (TextView)view.findViewById(R.id.txt_nhanvien_tendn);
 
             view.setTag(viewHolder);
         }else {
@@ -65,16 +65,16 @@ public class AdapterNhanVien extends BaseAdapter {
         }
         NhanVien nhanVien = nhanVienS.get(position);
 
-        viewHolder.txt_customstaff_TenNV.setText(nhanVien.getHOTENNV());
-        viewHolder.txt_customstaff_TenQuyen.setText(quyenDAO.LayTenQuyenTheoMa(nhanVien.getMAQUYEN()));
-        viewHolder.txt_customstaff_SDT.setText(nhanVien.getSDT());
-        viewHolder.txt_customstaff_Email.setText(nhanVien.getEMAIL());
+        viewHolder.txt_nhanvien_TenNV.setText(nhanVien.getHOTENNV());
+        viewHolder.txt_nhanvien_TenQuyen.setText(quyenDAO.LayTenQuyenTheoMa(nhanVien.getMAQUYEN()));
+        viewHolder.txt_nhanvien_SDT.setText(nhanVien.getSDT());
+        viewHolder.txt_nhanvien_tendn.setText(nhanVien.getTENDN());
 
         return view;
     }
 
     public class ViewHolder{
-        ImageView img_customstaff_HinhNV;
-        TextView txt_customstaff_TenNV, txt_customstaff_TenQuyen,txt_customstaff_SDT, txt_customstaff_Email;
+        ImageView img_nhanvien_HinhNV;
+        TextView txt_nhanvien_TenNV, txt_nhanvien_TenQuyen,txt_nhanvien_SDT, txt_nhanvien_tendn;
     }
 }

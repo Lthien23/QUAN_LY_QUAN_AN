@@ -4,7 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Pair;
+
+import androidx.core.util.Pair;
 
 import com.example.quanlyquanan.Model.ChiTietDonDat;
 import com.example.quanlyquanan.Model.DonDat;
@@ -112,5 +113,25 @@ public class DonDatDAO {
             return false;
         }
     }
+    public List<Pair<String, Float>> LayTongDoanhThuTheoNgay() {
+        List<Pair<String, Float>> doanhThuTheoNgay = new ArrayList<>();
+        String query = "SELECT " + CreateDatabase.TBL_DONDAT_NGAYDAT + ", SUM(" +
+                CreateDatabase.TBL_DONDAT_TONGTIEN + ") AS TongTien " +
+                "FROM " + CreateDatabase.TBL_DONDAT +
+                " GROUP BY " + CreateDatabase.TBL_DONDAT_NGAYDAT;
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String ngayDat = cursor.getString(cursor.getColumnIndex(CreateDatabase.TBL_DONDAT_NGAYDAT));
+                float tongTien = cursor.getFloat(cursor.getColumnIndex("TongTien"));
+                doanhThuTheoNgay.add(new Pair<>(ngayDat, tongTien));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return doanhThuTheoNgay;
+    }
+
 
 }

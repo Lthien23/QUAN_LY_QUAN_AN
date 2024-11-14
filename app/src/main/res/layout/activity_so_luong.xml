@@ -11,7 +11,7 @@
     >
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtl_amountmenu_SoLuong"
+        android:id="@+id/txtl_soluongActivity_SoLuong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -32,13 +32,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_amountmenu_DongY"
+        android:id="@+id/btn_soluongActivity_DongY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/nau"
         android:text="Đồng ý"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:background="@color/nau"
         app:backgroundTint="@color/nau" />
 </LinearLayout>

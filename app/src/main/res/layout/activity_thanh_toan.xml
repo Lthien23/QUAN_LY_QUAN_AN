@@ -15,7 +15,7 @@
         android:background="@color/nau"
         >
         <ImageView
-            android:id="@+id/img_payment_backbtn"
+            android:id="@+id/img_thanhtoanActivity_backbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -31,9 +31,9 @@
             android:fontFamily="@font/muli_black"
             android:padding="10dp"
             android:textAllCaps="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/img_payment_backbtn"
+            android:layout_toRightOf="@+id/img_thanhtoanActivity_backbtn"
             />
 
     </RelativeLayout>
@@ -44,7 +44,7 @@
         android:padding="15dp"
         >
         <TextView
-            android:id="@+id/txt_payment_TenBan"
+            android:id="@+id/txt_thanhtoanActivity_TenBan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bàn 1"
@@ -58,7 +58,7 @@
             />
 
         <TextView
-            android:id="@+id/txt_payment_NgayDat"
+            android:id="@+id/txt_thanhtoanActivity_NgayDat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20/12/2021"
@@ -75,7 +75,7 @@
     </RelativeLayout>
 
     <GridView
-        android:id="@+id/gvDisplayPayment"
+        android:id="@+id/gvthanhtoanActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -108,38 +108,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tổng tiền"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:fontFamily="@font/muli"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 />
             <TextView
-                android:id="@+id/txt_payment_TongTien"
+                android:id="@+id/txt_thanhtoanActivity_TongTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="780000 VNĐ"
                 android:paddingTop="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:fontFamily="@font/muli_black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_payment_ThanhToan"
-            android:layout_centerVertical="true"
-            android:layout_width="100dp"
-            android:padding="10dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/corner_border_primary"
-            android:text="Thanh toán"
-            android:textSize="20sp"
-            android:fontFamily="@font/muli_black"
-            />
-
     </RelativeLayout>
+    <Button
+        android:id="@+id/btn_thanhtoanActivity_ThanhToan"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/corner_border_black"
+        android:text="Thanh toán"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/muli_black"
+        />
 
 </LinearLayout>

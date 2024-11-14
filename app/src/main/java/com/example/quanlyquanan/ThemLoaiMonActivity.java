@@ -33,10 +33,9 @@ import java.io.InputStream;
 
 public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button BTN_addcategory_TaoLoai;
-    ImageView IMG_addcategory_back, IMG_addcategory_ThemHinh;
-    TextView TXT_addcategory_title;
-    TextInputLayout TXTL_addcategory_TenLoai;
+    Button btn_themloaimonActivity_themloaimon;
+    ImageView  img_themloaimonActivity_ThemHinh;
+    TextInputLayout txtl_themloaimonActivity_tenloai;
     LoaiMonDAO loaiMonDAO;
     int maloai = 0;
     Bitmap bitmapold;   //Bitmap dạng ảnh theo ma trận các pixel
@@ -51,7 +50,7 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
                         try{
                             InputStream inputStream = getContentResolver().openInputStream(uri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            IMG_addcategory_ThemHinh.setImageBitmap(bitmap);
+                            img_themloaimonActivity_ThemHinh.setImageBitmap(bitmap);
                         }catch (FileNotFoundException e){
                             e.printStackTrace();
                         }
@@ -67,36 +66,32 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         loaiMonDAO = new LoaiMonDAO(this);  //khởi tạo đối tượng dao kết nối csdl
 
         //region Lấy đối tượng view
-        BTN_addcategory_TaoLoai = (Button)findViewById(R.id.btn_addcategory_TaoLoai);
-        TXTL_addcategory_TenLoai = (TextInputLayout)findViewById(R.id.txtl_addcategory_TenLoai);
-        IMG_addcategory_back = (ImageView)findViewById(R.id.img_addcategory_back);
-        IMG_addcategory_ThemHinh = (ImageView)findViewById(R.id.img_addcategory_ThemHinh);
-        TXT_addcategory_title = (TextView)findViewById(R.id.txt_addcategory_title);
+        btn_themloaimonActivity_themloaimon = (Button)findViewById(R.id.btn_themloaimonActivity_themloaimon);
+        txtl_themloaimonActivity_tenloai = (TextInputLayout)findViewById(R.id.txtl_themloaimonActivity_tenloai);
+        img_themloaimonActivity_ThemHinh = (ImageView)findViewById(R.id.img_themloaimonActivity_ThemHinh);
         //endregion
 
-        BitmapDrawable olddrawable = (BitmapDrawable)IMG_addcategory_ThemHinh.getDrawable();
+        BitmapDrawable olddrawable = (BitmapDrawable)img_themloaimonActivity_ThemHinh.getDrawable();
         bitmapold = olddrawable.getBitmap();
 
         //region Hiển thị trang sửa nếu được chọn từ context menu sửa
         maloai = getIntent().getIntExtra("maloai",0);
         if(maloai != 0){
-            TXT_addcategory_title.setText(getResources().getString(R.string.editcategory));
             LoaiMon loaiMon = loaiMonDAO.LayLoaiMonTheoMa(maloai);
 
             //Hiển thị lại thông tin từ csdl
-            TXTL_addcategory_TenLoai.getEditText().setText(loaiMon.getTenLoai());
+            txtl_themloaimonActivity_tenloai.getEditText().setText(loaiMon.getTenLoai());
 
             byte[] categoryimage = loaiMon.getHinhAnh();
             Bitmap bitmap = BitmapFactory.decodeByteArray(categoryimage,0,categoryimage.length);
-            IMG_addcategory_ThemHinh.setImageBitmap(bitmap);
+            img_themloaimonActivity_ThemHinh.setImageBitmap(bitmap);
 
-            BTN_addcategory_TaoLoai.setText("Sửa loại");
+            btn_themloaimonActivity_themloaimon.setText("Sửa loại");
         }
         //endregion
 
-        IMG_addcategory_back.setOnClickListener(this);
-        IMG_addcategory_ThemHinh.setOnClickListener(this);
-        BTN_addcategory_TaoLoai.setOnClickListener(this);
+        img_themloaimonActivity_ThemHinh.setOnClickListener(this);
+        btn_themloaimonActivity_themloaimon.setOnClickListener(this);
     }
 
     @Override
@@ -105,27 +100,22 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         boolean ktra;
         String chucnang;
         switch (id){
-            case R.id.img_addcategory_back:
-                finish();
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right); //animation
-                break;
-
-            case R.id.img_addcategory_ThemHinh:
+            case R.id.img_themloaimonActivity_ThemHinh:
                 Intent iGetIMG = new Intent();
                 iGetIMG.setType("image/*"); //lấy những mục chứa hình ảnh
                 iGetIMG.setAction(Intent.ACTION_GET_CONTENT);   //lấy mục hiện tại đang chứa hình
                 resultLauncherOpenIMG.launch(Intent.createChooser(iGetIMG,getResources().getString(R.string.choseimg)));    //mở intent chọn hình ảnh
                 break;
 
-            case R.id.btn_addcategory_TaoLoai:
+            case R.id.btn_themloaimonActivity_themloaimon:
                 if(!validateImage() | !validateName()){
                     return;
                 }
 
-                String sTenLoai = TXTL_addcategory_TenLoai.getEditText().getText().toString();
+                String sTenLoai = txtl_themloaimonActivity_tenloai.getEditText().getText().toString();
                 LoaiMon loaiMon = new LoaiMon();
                 loaiMon.setTenLoai(sTenLoai);
-                loaiMon.setHinhAnh(imageViewtoByte(IMG_addcategory_ThemHinh));
+                loaiMon.setHinhAnh(imageViewtoByte(img_themloaimonActivity_ThemHinh));
                 if(maloai != 0){
                     ktra = loaiMonDAO.SuaLoaiMon(loaiMon,maloai);
                     chucnang = "sualoai";
@@ -156,7 +146,7 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
 
     //region validate fields
     private boolean validateImage(){
-        BitmapDrawable drawable = (BitmapDrawable)IMG_addcategory_ThemHinh.getDrawable();
+        BitmapDrawable drawable = (BitmapDrawable)img_themloaimonActivity_ThemHinh.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
         if(bitmap == bitmapold){
@@ -168,13 +158,13 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
     }
 
     private boolean validateName(){
-        String val = TXTL_addcategory_TenLoai.getEditText().getText().toString().trim();
+        String val = txtl_themloaimonActivity_tenloai.getEditText().getText().toString().trim();
         if(val.isEmpty()){
-            TXTL_addcategory_TenLoai.setError(getResources().getString(R.string.not_empty));
+            txtl_themloaimonActivity_tenloai.setError(getResources().getString(R.string.not_empty));
             return false;
         }else {
-            TXTL_addcategory_TenLoai.setError(null);
-            TXTL_addcategory_TenLoai.setErrorEnabled(false);
+            txtl_themloaimonActivity_tenloai.setError(null);
+            txtl_themloaimonActivity_tenloai.setErrorEnabled(false);
             return true;
         }
     }

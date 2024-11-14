@@ -17,8 +17,8 @@ import com.example.quanlyquanan.DAO.NhanVienDAO;
 import com.example.quanlyquanan.R;
 
 public class DangNhapActivity extends AppCompatActivity {
-    Button BTN_login_DangNhap, BTN_login_DangKy;
-    TextInputLayout TXTL_login_TenDN, TXTL_login_MatKhau;
+    Button btn_dangnhap_dangnhap, btn_dangnhap_dangky;
+    TextInputLayout txtl_dangnhap_tendn, txtl_dangnhap_matkhau;
     NhanVienDAO nhanVienDAO;
 
     @Override
@@ -27,22 +27,22 @@ public class DangNhapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dang_nhap);
 
         //thuộc tính view
-        TXTL_login_TenDN = (TextInputLayout)findViewById(R.id.txtl_login_TenDN);
-        TXTL_login_MatKhau = (TextInputLayout)findViewById(R.id.txtl_login_MatKhau);
-        BTN_login_DangNhap = (Button)findViewById(R.id.btn_login_DangNhap);
-        BTN_login_DangKy = (Button)findViewById(R.id.btn_login_DangKy);
+        txtl_dangnhap_tendn = (TextInputLayout)findViewById(R.id.txtl_dangnhap_tendn);
+        txtl_dangnhap_matkhau = (TextInputLayout)findViewById(R.id.txtl_dangnhap_matkhau);
+        btn_dangnhap_dangnhap = (Button)findViewById(R.id.btn_dangnhap_dangnhap);
+        btn_dangnhap_dangky = (Button)findViewById(R.id.btn_dangnhap_dangky);
 
         nhanVienDAO = new NhanVienDAO(this);    //khởi tạo kết nối csdl
 
-        BTN_login_DangNhap.setOnClickListener(new View.OnClickListener() {
+        btn_dangnhap_dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!validateUserName() | !validatePassWord()){
                     return;
                 }
 
-                String tenDN = TXTL_login_TenDN.getEditText().getText().toString();
-                String matKhau = TXTL_login_MatKhau.getEditText().getText().toString();
+                String tenDN = txtl_dangnhap_tendn.getEditText().getText().toString();
+                String matKhau = txtl_dangnhap_matkhau.getEditText().getText().toString();
                 int ktra = nhanVienDAO.KiemTraDN(tenDN,matKhau);
                 int maquyen = nhanVienDAO.LayQuyenNV(ktra);
                 if(ktra != 0){
@@ -54,7 +54,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
                     //gửi dữ liệu user qua trang chủ
                     Intent intent = new Intent(getApplicationContext(),TrangChuActivity.class);
-                    intent.putExtra("tendn",TXTL_login_TenDN.getEditText().getText().toString());
+                    intent.putExtra("tendn",txtl_dangnhap_tendn.getEditText().getText().toString());
                     intent.putExtra("manv",ktra);
                     startActivity(intent);
                 }else {
@@ -92,27 +92,27 @@ public class DangNhapActivity extends AppCompatActivity {
 
     //region Validate field
     private boolean validateUserName(){
-        String val = TXTL_login_TenDN.getEditText().getText().toString().trim();
+        String val = txtl_dangnhap_tendn.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_login_TenDN.setError(getResources().getString(R.string.not_empty));
+            txtl_dangnhap_tendn.setError(getResources().getString(R.string.not_empty));
             return false;
         }else {
-            TXTL_login_TenDN.setError(null);
-            TXTL_login_TenDN.setErrorEnabled(false);
+            txtl_dangnhap_tendn.setError(null);
+            txtl_dangnhap_tendn.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePassWord(){
-        String val = TXTL_login_MatKhau.getEditText().getText().toString().trim();
+        String val = txtl_dangnhap_matkhau.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_login_MatKhau.setError(getResources().getString(R.string.not_empty));
+            txtl_dangnhap_matkhau.setError(getResources().getString(R.string.not_empty));
             return false;
         }else{
-            TXTL_login_MatKhau.setError(null);
-            TXTL_login_MatKhau.setErrorEnabled(false);
+            txtl_dangnhap_matkhau.setError(null);
+            txtl_dangnhap_matkhau.setErrorEnabled(false);
             return true;
         }
     }

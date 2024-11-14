@@ -16,8 +16,8 @@ import com.example.quanlyquanan.R;
 
 public class SoLuongActivity extends AppCompatActivity {
 
-    TextInputLayout TXTL_amountmenu_SoLuong;
-    Button BTN_amountmenu_DongY;
+    TextInputLayout txtl_soluongActivity_SoLuong;
+    Button btn_soluongActivity_DongY;
     int maban, mamon;
     DonDatDAO donDatDAO;
     ChiTietDonDatDAO chiTietDonDatDAO;
@@ -28,8 +28,8 @@ public class SoLuongActivity extends AppCompatActivity {
         setContentView(R.layout.activity_so_luong);
 
         //Lấy đối tượng view
-        TXTL_amountmenu_SoLuong = (TextInputLayout)findViewById(R.id.txtl_amountmenu_SoLuong);
-        BTN_amountmenu_DongY = (Button)findViewById(R.id.btn_amountmenu_DongY);
+        txtl_soluongActivity_SoLuong = (TextInputLayout)findViewById(R.id.txtl_soluongActivity_SoLuong);
+        btn_soluongActivity_DongY = (Button)findViewById(R.id.btn_soluongActivity_DongY);
 
         //khởi tạo kết nối csdl
         donDatDAO = new DonDatDAO(this);
@@ -40,7 +40,7 @@ public class SoLuongActivity extends AppCompatActivity {
         maban = intent.getIntExtra("maban",0);
         mamon = intent.getIntExtra("mamon",0);
 
-        BTN_amountmenu_DongY.setOnClickListener(new View.OnClickListener() {
+        btn_soluongActivity_DongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!validateAmount()){
@@ -52,7 +52,7 @@ public class SoLuongActivity extends AppCompatActivity {
                 if(ktra){
                     //update số lượng món đã chọn
                     int sluongcu = chiTietDonDatDAO.LaySLMonTheoMaDon(madondat,mamon);
-                    int sluongmoi = Integer.parseInt(TXTL_amountmenu_SoLuong.getEditText().getText().toString());
+                    int sluongmoi = Integer.parseInt(txtl_soluongActivity_SoLuong.getEditText().getText().toString());
                     int tongsl = sluongcu + sluongmoi;
 
                     ChiTietDonDat chiTietDonDat = new ChiTietDonDat();
@@ -68,7 +68,7 @@ public class SoLuongActivity extends AppCompatActivity {
                     }
                 }else {
                     //thêm số lượng món nếu chưa chọn món này
-                    int sluong = Integer.parseInt(TXTL_amountmenu_SoLuong.getEditText().getText().toString());
+                    int sluong = Integer.parseInt(txtl_soluongActivity_SoLuong.getEditText().getText().toString());
                     ChiTietDonDat chiTietDonDat = new ChiTietDonDat();
                     chiTietDonDat.setMaMon(mamon);
                     chiTietDonDat.setMaDonDat(madondat);
@@ -87,16 +87,16 @@ public class SoLuongActivity extends AppCompatActivity {
 
     //validate số lượng
     private boolean validateAmount(){
-        String val = TXTL_amountmenu_SoLuong.getEditText().getText().toString().trim();
+        String val = txtl_soluongActivity_SoLuong.getEditText().getText().toString().trim();
         if(val.isEmpty()){
-            TXTL_amountmenu_SoLuong.setError(getResources().getString(R.string.not_empty));
+            txtl_soluongActivity_SoLuong.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(!val.matches(("\\d+(?:\\.\\d+)?"))){
-            TXTL_amountmenu_SoLuong.setError("Số lượng không hợp lệ");
+            txtl_soluongActivity_SoLuong.setError("Số lượng không hợp lệ");
             return false;
         }else {
-            TXTL_amountmenu_SoLuong.setError(null);
-            TXTL_amountmenu_SoLuong.setErrorEnabled(false);
+            txtl_soluongActivity_SoLuong.setError(null);
+            txtl_soluongActivity_SoLuong.setErrorEnabled(false);
             return true;
         }
     }

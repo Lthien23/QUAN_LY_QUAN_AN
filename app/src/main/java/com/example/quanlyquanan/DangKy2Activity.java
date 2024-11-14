@@ -20,9 +20,9 @@ import java.util.Calendar;
 
 public class DangKy2Activity extends AppCompatActivity {
 
-    RadioGroup RG_signup_GioiTinh;
-    DatePicker DT_signup_NgaySinh;
-    Button BTN_signup_next;
+    RadioGroup rg_dangki2_GioiTinh;
+    DatePicker dt_dangky2_ngaysinh;
+    Button btn_dangky2_tieptheo;
     String hoTen,tenDN,eMail,sDT,matKhau,gioiTinh;
     NhanVienDAO nhanVienDAO;
     QuyenDAO quyenDAO;
@@ -33,9 +33,9 @@ public class DangKy2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ky2);
 
         //lấy đối tượng view
-        RG_signup_GioiTinh = (RadioGroup)findViewById(R.id.rg_signup_GioiTinh);
-        DT_signup_NgaySinh = (DatePicker)findViewById(R.id.dt_signup_NgaySinh);
-        BTN_signup_next = (Button)findViewById(R.id.btn_signup_next);
+        rg_dangki2_GioiTinh = (RadioGroup)findViewById(R.id.rg_dangki2_GioiTinh);
+        dt_dangky2_ngaysinh = (DatePicker)findViewById(R.id.dt_dangky2_ngaysinh);
+        btn_dangky2_tieptheo = (Button)findViewById(R.id.btn_dangky2_tieptheo);
 
         //lấy dữ liệu từ bundle của register1
         Bundle bundle = getIntent().getBundleExtra(DangKy1Activity.BUNDLE);
@@ -50,7 +50,7 @@ public class DangKy2Activity extends AppCompatActivity {
         nhanVienDAO = new NhanVienDAO(this);
         quyenDAO = new QuyenDAO(this);
 
-        BTN_signup_next.setOnClickListener(new View.OnClickListener() {
+        btn_dangky2_tieptheo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!validateAge() | !validateGender()){
@@ -58,16 +58,16 @@ public class DangKy2Activity extends AppCompatActivity {
                 }
 
                 //lấy các thông tin còn lại
-                switch (RG_signup_GioiTinh.getCheckedRadioButtonId()){
-                    case R.id.rd_signup_Nam:
+                switch (rg_dangki2_GioiTinh.getCheckedRadioButtonId()){
+                    case R.id.rd_dangki2_Nam:
                         gioiTinh = "Nam"; break;
-                    case R.id.rd_signup_Nu:
+                    case R.id.rd_dangky2_Nu:
                         gioiTinh = "Nữ"; break;
-                    case R.id.rd_signup_Khac:
+                    case R.id.rd_dangky2_Khac:
                         gioiTinh = "Khác"; break;
                 }
-                String ngaySinh = DT_signup_NgaySinh.getDayOfMonth() + "/" + (DT_signup_NgaySinh.getMonth() + 1)
-                        +"/"+DT_signup_NgaySinh.getYear();
+                String ngaySinh = dt_dangky2_ngaysinh.getDayOfMonth() + "/" + (dt_dangky2_ngaysinh.getMonth() + 1)
+                        +"/"+dt_dangky2_ngaysinh.getYear();
 
                 //truyền dữ liệu vào obj nhanvienDTO
                 NhanVien nhanVien = new NhanVien();
@@ -123,7 +123,7 @@ public class DangKy2Activity extends AppCompatActivity {
 
     //region Validate field
     private boolean validateGender(){
-        if(RG_signup_GioiTinh.getCheckedRadioButtonId() == -1){
+        if(rg_dangki2_GioiTinh.getCheckedRadioButtonId() == -1){
             Toast.makeText(this,"Hãy chọn giới tính",Toast.LENGTH_SHORT).show();
             return false;
         }else {
@@ -133,7 +133,7 @@ public class DangKy2Activity extends AppCompatActivity {
 
     private boolean validateAge(){
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int userAge = DT_signup_NgaySinh.getYear();
+        int userAge = dt_dangky2_ngaysinh.getYear();
         int isAgeValid = currentYear - userAge;
 
         if(isAgeValid < 10){

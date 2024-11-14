@@ -40,7 +40,7 @@ import java.util.List;
 
 public class LoaiMonFragment extends Fragment {
 
-    GridView gvCategory;
+    GridView gvLoaimonFragment;
     List<LoaiMon> loaiMonList;
     LoaiMonDAO loaiMonDAO;
     AdapterLoaiMon adapter;
@@ -85,7 +85,7 @@ public class LoaiMonFragment extends Fragment {
         setHasOptionsMenu(true);
         ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý loại món");
 
-        gvCategory = (GridView)view.findViewById(R.id.gvCategory);
+        gvLoaimonFragment = (GridView)view.findViewById(R.id.gvLoaimonFragment);
 
         fragmentManager = getActivity().getSupportFragmentManager();
 
@@ -97,7 +97,7 @@ public class LoaiMonFragment extends Fragment {
             maban = bDataCategory.getInt("maban");
         }
 
-        gvCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gvLoaimonFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int maloai = loaiMonList.get(position).getMaLoai();
@@ -115,7 +115,7 @@ public class LoaiMonFragment extends Fragment {
             }
         });
 
-        registerForContextMenu(gvCategory);
+        registerForContextMenu(gvLoaimonFragment);
 
         return view;
     }
@@ -184,7 +184,7 @@ public class LoaiMonFragment extends Fragment {
     private void HienThiDSLoai(){
         loaiMonList = loaiMonDAO.LayDSLoaiMon();
         adapter = new AdapterLoaiMon(getActivity(),R.layout.loaimon,loaiMonList);
-        gvCategory.setAdapter(adapter);
+        gvLoaimonFragment.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 }

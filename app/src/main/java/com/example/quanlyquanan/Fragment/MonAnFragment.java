@@ -43,7 +43,7 @@ public class MonAnFragment extends Fragment {
 
     int maloai, maban;
     String tenloai,tinhtrang;
-    GridView gvDisplayMenu;
+    GridView gvMonanfragment;
     MonDAO monDAO;
     List<Mon> monList;
     AdapterMonAn adapterMonAn;
@@ -85,7 +85,7 @@ public class MonAnFragment extends Fragment {
         ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý món ăn");
         monDAO = new MonDAO(getActivity());
 
-        gvDisplayMenu = (GridView)view.findViewById(R.id.gvDisplayMenu);
+        gvMonanfragment = (GridView)view.findViewById(R.id.gvMonanfragment);
 
         Bundle bundle = getArguments();
         if(bundle !=null){
@@ -94,7 +94,7 @@ public class MonAnFragment extends Fragment {
             maban = bundle.getInt("maban");
             HienThiDSMon();
 
-            gvDisplayMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            gvMonanfragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //nếu lấy đc mã bàn mới mở
@@ -113,7 +113,7 @@ public class MonAnFragment extends Fragment {
             });
         }
         setHasOptionsMenu(true);
-        registerForContextMenu(gvDisplayMenu);
+        registerForContextMenu(gvMonanfragment);
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -190,7 +190,7 @@ public class MonAnFragment extends Fragment {
     private void HienThiDSMon(){
         monList = monDAO.LayDSMonTheoLoai(maloai);
         adapterMonAn = new AdapterMonAn(getActivity(),R.layout.monan,monList);
-        gvDisplayMenu.setAdapter(adapterMonAn);
+        gvMonanfragment.setAdapter(adapterMonAn);
         adapterMonAn.notifyDataSetChanged();
     }
 

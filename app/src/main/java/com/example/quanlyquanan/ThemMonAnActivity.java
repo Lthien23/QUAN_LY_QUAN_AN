@@ -40,13 +40,12 @@ import java.util.List;
 
 public class ThemMonAnActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button BTN_addmenu_ThemMon;
+    Button btn_themmonanActivity_themmon;
     RelativeLayout layout_trangthaimon;
-    ImageView IMG_addmenu_ThemHinh, IMG_addmenu_back;
-    TextView TXT_addmenu_title;
-    TextInputLayout TXTL_addmenu_TenMon,TXTL_addmenu_GiaTien,TXTL_addmenu_LoaiMon;
-    RadioGroup RG_addmenu_TinhTrang;
-    RadioButton RD_addmenu_ConMon, RD_addmenu_HetMon;
+    ImageView img_themmonanActivity_ThemHinh;
+    TextInputLayout txtl_themmonanActivity_tenmon,txtl_themmonanActivity_giatien,txtl_themmonanActivity_loaimon;
+    RadioGroup rg_themmonanActivity_tinhtrang;
+    RadioButton rd_themmonanActivity_conmon, rd_themmonanActivity_hetmon;
     MonDAO monDAO;
     String tenloai, sTenMon,sGiaTien,sTinhTrang;
     Bitmap bitmapold;
@@ -62,7 +61,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
                         try{
                             InputStream inputStream = getContentResolver().openInputStream(uri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                            IMG_addmenu_ThemHinh.setImageBitmap(bitmap);
+                            img_themmonanActivity_ThemHinh.setImageBitmap(bitmap);
                         }catch (FileNotFoundException e){
                             e.printStackTrace();
                         }
@@ -77,58 +76,54 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_them_mon_an);
 
         //region Lấy đối tượng view
-        IMG_addmenu_ThemHinh = (ImageView)findViewById(R.id.img_addmenu_ThemHinh);
-        IMG_addmenu_ThemHinh.setTag(R.drawable.ic_baseline_add_circle_24);
-        IMG_addmenu_back = (ImageView)findViewById(R.id.img_addmenu_back);
-        TXTL_addmenu_TenMon = (TextInputLayout)findViewById(R.id.txtl_addmenu_TenMon);
-        TXTL_addmenu_GiaTien = (TextInputLayout)findViewById(R.id.txtl_addmenu_GiaTien);
-        TXTL_addmenu_LoaiMon = (TextInputLayout)findViewById(R.id.txtl_addmenu_LoaiMon);
-        BTN_addmenu_ThemMon = (Button)findViewById(R.id.btn_addmenu_ThemMon);
-        TXT_addmenu_title = (TextView)findViewById(R.id.txt_addmenu_title);
+        img_themmonanActivity_ThemHinh = (ImageView)findViewById(R.id.img_themmonanActivity_ThemHinh);
+        img_themmonanActivity_ThemHinh.setTag(R.drawable.ic_baseline_add_circle_24);
+        txtl_themmonanActivity_tenmon = (TextInputLayout)findViewById(R.id.txtl_themmonanActivity_tenmon);
+        txtl_themmonanActivity_giatien = (TextInputLayout)findViewById(R.id.txtl_themmonanActivity_giatien);
+        txtl_themmonanActivity_loaimon = (TextInputLayout)findViewById(R.id.txtl_themmonanActivity_loaimon);
+        btn_themmonanActivity_themmon = (Button)findViewById(R.id.btn_themmonanActivity_themmon);
         layout_trangthaimon = (RelativeLayout)findViewById(R.id.layout_trangthaimon);
-        RG_addmenu_TinhTrang = (RadioGroup)findViewById(R.id.rg_addmenu_TinhTrang);
-        RD_addmenu_ConMon = (RadioButton)findViewById(R.id.rd_addmenu_ConMon);
-        RD_addmenu_HetMon = (RadioButton)findViewById(R.id.rd_addmenu_HetMon);
+        rg_themmonanActivity_tinhtrang = (RadioGroup)findViewById(R.id.rg_themmonanActivity_tinhtrang);
+        rd_themmonanActivity_conmon = (RadioButton)findViewById(R.id.rd_themmonanActivity_conmon);
+        rd_themmonanActivity_hetmon = (RadioButton)findViewById(R.id.rd_themmonanActivity_hetmon);
         //endregion
 
         Intent intent = getIntent();
         maloai = intent.getIntExtra("maLoai",-1);
         tenloai = intent.getStringExtra("tenLoai");
         monDAO = new MonDAO(this);  //khởi tạo đối tượng dao kết nối csdl
-        TXTL_addmenu_LoaiMon.getEditText().setText(tenloai);
+        txtl_themmonanActivity_loaimon.getEditText().setText(tenloai);
 
-        BitmapDrawable olddrawable = (BitmapDrawable)IMG_addmenu_ThemHinh.getDrawable();
+        BitmapDrawable olddrawable = (BitmapDrawable)img_themmonanActivity_ThemHinh.getDrawable();
         bitmapold = olddrawable.getBitmap();
 
         //region Hiển thị trang sửa nếu được chọn từ context menu sửa
         mamon = getIntent().getIntExtra("mamon",0);
         if(mamon != 0){
-            TXT_addmenu_title.setText("Sửa thực đơn");
             Mon mon = monDAO.LayMonTheoMa(mamon);
 
-            TXTL_addmenu_TenMon.getEditText().setText(mon.getTenMon());
-            TXTL_addmenu_GiaTien.getEditText().setText(mon.getGiaTien());
+            txtl_themmonanActivity_tenmon.getEditText().setText(mon.getTenMon());
+            txtl_themmonanActivity_giatien.getEditText().setText(mon.getGiaTien());
 
             byte[] menuimage = mon.getHinhAnh();
             Bitmap bitmap = BitmapFactory.decodeByteArray(menuimage,0,menuimage.length);
-            IMG_addmenu_ThemHinh.setImageBitmap(bitmap);
+            img_themmonanActivity_ThemHinh.setImageBitmap(bitmap);
 
             layout_trangthaimon.setVisibility(View.VISIBLE);
             String tinhtrang = mon.getTinhTrang();
             if(tinhtrang.equals("true")){
-                RD_addmenu_ConMon.setChecked(true);
+                rd_themmonanActivity_conmon.setChecked(true);
             }else {
-                RD_addmenu_HetMon.setChecked(true);
+                rd_themmonanActivity_hetmon.setChecked(true);
             }
 
-            BTN_addmenu_ThemMon.setText("Sửa món");
+            btn_themmonanActivity_themmon.setText("Sửa món");
         }
 
         //endregion
 
-        IMG_addmenu_ThemHinh.setOnClickListener(this);
-        BTN_addmenu_ThemMon.setOnClickListener(this);
-        IMG_addmenu_back.setOnClickListener(this);
+        img_themmonanActivity_ThemHinh.setOnClickListener(this);
+        btn_themmonanActivity_themmon.setOnClickListener(this);
     }
 
     @Override
@@ -137,29 +132,24 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         boolean ktra;
         String chucnang;
         switch (id){
-            case R.id.img_addmenu_ThemHinh:
+            case R.id.img_themmonanActivity_ThemHinh:
                 Intent iGetIMG = new Intent();
                 iGetIMG.setType("image/*");
                 iGetIMG.setAction(Intent.ACTION_GET_CONTENT);
                 resultLauncherOpenIMG.launch(Intent.createChooser(iGetIMG,getResources().getString(R.string.choseimg)));
                 break;
 
-            case R.id.img_addmenu_back:
-                finish();
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                break;
-
-            case R.id.btn_addmenu_ThemMon:
+            case R.id.btn_themmonanActivity_themmon:
                 //ktra validation
                 if(!validateImage() | !validateName() | !validatePrice()){
                     return;
                 }
 
-                sTenMon = TXTL_addmenu_TenMon.getEditText().getText().toString();
-                sGiaTien = TXTL_addmenu_GiaTien.getEditText().getText().toString();
-                switch (RG_addmenu_TinhTrang.getCheckedRadioButtonId()){
-                    case R.id.rd_addmenu_ConMon: sTinhTrang = "true";   break;
-                    case R.id.rd_addmenu_HetMon: sTinhTrang = "false";  break;
+                sTenMon = txtl_themmonanActivity_tenmon.getEditText().getText().toString();
+                sGiaTien = txtl_themmonanActivity_giatien.getEditText().getText().toString();
+                switch (rg_themmonanActivity_tinhtrang.getCheckedRadioButtonId()){
+                    case R.id.rd_themmonanActivity_conmon: sTinhTrang = "true";   break;
+                    case R.id.rd_themmonanActivity_hetmon: sTinhTrang = "false";  break;
                 }
 
                 Mon mon = new Mon();
@@ -167,7 +157,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
                 mon.setTenMon(sTenMon);
                 mon.setGiaTien(sGiaTien);
                 mon.setTinhTrang(sTinhTrang);
-                mon.setHinhAnh(imageViewtoByte(IMG_addmenu_ThemHinh));
+                mon.setHinhAnh(imageViewtoByte(img_themmonanActivity_ThemHinh));
                 if(mamon!= 0){
                     ktra = monDAO.SuaMon(mon,mamon);
                     chucnang = "suamon";
@@ -198,7 +188,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
 
     //region Validate field
     private boolean validateImage(){
-        BitmapDrawable drawable = (BitmapDrawable)IMG_addmenu_ThemHinh.getDrawable();
+        BitmapDrawable drawable = (BitmapDrawable)img_themmonanActivity_ThemHinh.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
         if(bitmap == bitmapold){
@@ -210,28 +200,28 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
     }
 
     private boolean validateName(){
-        String val = TXTL_addmenu_TenMon.getEditText().getText().toString().trim();
+        String val = txtl_themmonanActivity_tenmon.getEditText().getText().toString().trim();
         if(val.isEmpty()){
-            TXTL_addmenu_TenMon.setError(getResources().getString(R.string.not_empty));
+            txtl_themmonanActivity_tenmon.setError(getResources().getString(R.string.not_empty));
             return false;
         }else {
-            TXTL_addmenu_TenMon.setError(null);
-            TXTL_addmenu_TenMon.setErrorEnabled(false);
+            txtl_themmonanActivity_tenmon.setError(null);
+            txtl_themmonanActivity_tenmon.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePrice(){
-        String val = TXTL_addmenu_GiaTien.getEditText().getText().toString().trim();
+        String val = txtl_themmonanActivity_giatien.getEditText().getText().toString().trim();
         if(val.isEmpty()){
-            TXTL_addmenu_GiaTien.setError(getResources().getString(R.string.not_empty));
+            txtl_themmonanActivity_giatien.setError(getResources().getString(R.string.not_empty));
             return false;
         }else if(!val.matches(("\\d+(?:\\.\\d+)?"))){
-            TXTL_addmenu_GiaTien.setError("Giá tiền không hợp lệ");
+            txtl_themmonanActivity_giatien.setError("Giá tiền không hợp lệ");
             return false;
         }else {
-            TXTL_addmenu_GiaTien.setError(null);
-            TXTL_addmenu_GiaTien.setErrorEnabled(false);
+            txtl_themmonanActivity_giatien.setError(null);
+            txtl_themmonanActivity_giatien.setErrorEnabled(false);
             return true;
         }
     }

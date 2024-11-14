@@ -54,32 +54,32 @@ public class AdapterMonAn extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout,parent,false);
 
-            viewholder.img_custommenu_HinhMon = (ImageView)view.findViewById(R.id.img_custommenu_HinhMon);
-            viewholder.txt_custommenu_TenMon = (TextView) view.findViewById(R.id.txt_custommenu_TenMon);
-            viewholder.txt_custommenu_TinhTrang = (TextView)view.findViewById(R.id.txt_custommenu_TinhTrang);
-            viewholder.txt_custommenu_GiaTien = (TextView)view.findViewById(R.id.txt_custommenu_GiaTien);
+            viewholder.img_monan_HinhMon = (ImageView)view.findViewById(R.id.img_monan_HinhMon);
+            viewholder.txt_monan_TenMon = (TextView) view.findViewById(R.id.txt_monan_TenMon);
+            viewholder.txt_monan_TinhTrang = (TextView)view.findViewById(R.id.txt_monan_TinhTrang);
+            viewholder.txt_monan_GiaTien = (TextView)view.findViewById(R.id.txt_monan_GiaTien);
             view.setTag(viewholder);
         }else {
             viewholder = (Viewholder) view.getTag();
         }
         Mon mon = monList.get(position);
-        viewholder.txt_custommenu_TenMon.setText(mon.getTenMon());
-        viewholder.txt_custommenu_GiaTien.setText(mon.getGiaTien()+" VNĐ");
+        viewholder.txt_monan_TenMon.setText(mon.getTenMon());
+        viewholder.txt_monan_GiaTien.setText(mon.getGiaTien()+" VNĐ");
 
         //hiển thị tình trạng của món
         if(mon.getTinhTrang().equals("true")){
-            viewholder.txt_custommenu_TinhTrang.setText("Còn món");
+            viewholder.txt_monan_TinhTrang.setText("Còn món");
         }else{
-            viewholder.txt_custommenu_TinhTrang.setText("Hết món");
+            viewholder.txt_monan_TinhTrang.setText("Hết món");
         }
 
         //lấy hình ảnh
         if(mon.getHinhAnh() != null){
             byte[] menuimage = mon.getHinhAnh();
             Bitmap bitmap = BitmapFactory.decodeByteArray(menuimage,0,menuimage.length);
-            viewholder.img_custommenu_HinhMon.setImageBitmap(bitmap);
+            viewholder.img_monan_HinhMon.setImageBitmap(bitmap);
         }else {
-            viewholder.img_custommenu_HinhMon.setImageResource(R.drawable.monanminhhoa);
+            viewholder.img_monan_HinhMon.setImageResource(R.drawable.monanminhhoa);
         }
 
         return view;
@@ -87,8 +87,8 @@ public class AdapterMonAn extends BaseAdapter {
 
     //tạo viewholer lưu trữ component
     public class Viewholder{
-        ImageView img_custommenu_HinhMon;
-        TextView txt_custommenu_TenMon, txt_custommenu_GiaTien,txt_custommenu_TinhTrang;
+        ImageView img_monan_HinhMon;
+        TextView txt_monan_TenMon, txt_monan_GiaTien,txt_monan_TinhTrang;
 
     }
 }

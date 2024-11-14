@@ -16,7 +16,7 @@
         android:layout_marginBottom="7dp"
         >
         <TextView
-            android:id="@+id/txt_customstatistic_MaDon"
+            android:id="@+id/txt_thongke_MaDon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mã đơn: 1"
@@ -28,16 +28,16 @@
             />
 
         <ImageView
-            android:id="@+id/img_customstatistic_calendar"
+            android:id="@+id/img_thongke_lich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_calendar_today_24"
-            android:layout_toStartOf="@id/txt_customstatistic_NgayDat"
-            android:layout_toLeftOf="@id/txt_customstatistic_NgayDat"
+            android:layout_toStartOf="@id/txt_thongke_NgayDat"
+            android:layout_toLeftOf="@id/txt_thongke_NgayDat"
             android:layout_centerVertical="true"
             />
         <TextView
-            android:id="@+id/txt_customstatistic_NgayDat"
+            android:id="@+id/txt_thongke_NgayDat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11/07/2020"
@@ -59,7 +59,7 @@
         >
 
         <TextView
-            android:id="@+id/txt_customstatistic_TenNV"
+            android:id="@+id/txt_thongke_TenNV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Le Thuy Hien"
@@ -69,8 +69,8 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
-            android:id="@+id/txt_customstatistic_BanDat"
-            android:layout_below="@id/txt_customstatistic_TenNV"
+            android:id="@+id/txt_thongke_BanDat"
+            android:layout_below="@id/txt_thongke_TenNV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bàn 1"
@@ -78,8 +78,8 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
-            android:id="@+id/txt_customstatistic_TongTien"
-            android:layout_below="@id/txt_customstatistic_BanDat"
+            android:id="@+id/txt_thongke_TongTien"
+            android:layout_below="@id/txt_thongke_BanDat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="120000 VNĐ"
@@ -87,7 +87,7 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
-            android:id="@+id/txt_customstatistic_TrangThai"
+            android:id="@+id/txt_thongke_TrangThai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

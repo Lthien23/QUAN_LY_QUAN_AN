@@ -22,10 +22,10 @@ import java.util.List;
 
 public class ThanhToanActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView IMG_payment_backbtn;
-    TextView TXT_payment_TenBan, TXT_payment_NgayDat, TXT_payment_TongTien;
-    Button BTN_payment_ThanhToan;
-    GridView gvDisplayPayment;
+    ImageView img_thanhtoanActivity_backbtn;
+    TextView txt_thanhtoanActivity_TenBan, txt_thanhtoanActivity_NgayDat, txt_thanhtoanActivity_TongTien;
+    Button btn_thanhtoanActivity_ThanhToan;
+    GridView gvthanhtoanActivity;
     DonDatDAO donDatDAO;
     BanAnDAO banAnDAO;
     ThanhToanDAO thanhToanDAO;
@@ -34,18 +34,19 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
     long tongtien = 0;
     int maban, madondat;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanh_toan);
 
         //region thuộc tính view
-        gvDisplayPayment = findViewById(R.id.gvDisplayPayment);
-        IMG_payment_backbtn = findViewById(R.id.img_payment_backbtn);
-        TXT_payment_TenBan = findViewById(R.id.txt_payment_TenBan);
-        TXT_payment_NgayDat = findViewById(R.id.txt_payment_NgayDat);
-        TXT_payment_TongTien = findViewById(R.id.txt_payment_TongTien);
-        BTN_payment_ThanhToan = findViewById(R.id.btn_payment_ThanhToan);
+        gvthanhtoanActivity = findViewById(R.id.gvthanhtoanActivity);
+        img_thanhtoanActivity_backbtn = findViewById(R.id.img_thanhtoanActivity_backbtn);
+        txt_thanhtoanActivity_TenBan = findViewById(R.id.txt_thanhtoanActivity_TenBan);
+        txt_thanhtoanActivity_NgayDat = findViewById(R.id.txt_thanhtoanActivity_NgayDat);
+        txt_thanhtoanActivity_TongTien = findViewById(R.id.txt_thanhtoanActivity_TongTien);
+        btn_thanhtoanActivity_ThanhToan = findViewById(R.id.btn_thanhtoanActivity_ThanhToan);
         //endregion
 
         //khởi tạo kết nối csdl
@@ -59,8 +60,8 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
         String tenban = intent.getStringExtra("tenban");
         String ngaydat = intent.getStringExtra("ngaydat");
 
-        TXT_payment_TenBan.setText(tenban);
-        TXT_payment_NgayDat.setText(ngaydat);
+        txt_thanhtoanActivity_TenBan.setText(tenban);
+        txt_thanhtoanActivity_NgayDat.setText(ngaydat);
 
         //kiểm tra mã bàn tồn tại thì hiển thị
         if (maban != 0) {
@@ -71,22 +72,22 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
                 int giatien = thanhToanS.get(i).getGiaTien();
                 tongtien += (soluong * giatien);
             }
-            TXT_payment_TongTien.setText(String.valueOf(tongtien) + " VNĐ");
+            txt_thanhtoanActivity_TongTien.setText(String.valueOf(tongtien) + " VNĐ");
         }
 
-        BTN_payment_ThanhToan.setOnClickListener(this);
-        IMG_payment_backbtn.setOnClickListener(this);
+        btn_thanhtoanActivity_ThanhToan.setOnClickListener(this);
+        img_thanhtoanActivity_backbtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.btn_payment_ThanhToan:
+            case R.id.btn_thanhtoanActivity_ThanhToan:
                 showPaymentMethodDialog(); // Hiển thị hộp thoại chọn phương thức thanh toán
                 break;
 
-            case R.id.img_payment_backbtn:
+            case R.id.img_thanhtoanActivity_backbtn:
                 finish();
                 break;
         }
@@ -110,7 +111,7 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
                     boolean ktratongtien = donDatDAO.UpdateTongTienDonDat(madondat, String.valueOf(tongtien));
                     if (ktraban && ktradondat && ktratongtien) {
                         HienThiThanhToan();
-                        TXT_payment_TongTien.setText("0 VNĐ");
+                        txt_thanhtoanActivity_TongTien.setText("0 VNĐ");
                         Toast.makeText(getApplicationContext(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
 
                         // Chuyển về TrangChuActivity
@@ -128,7 +129,7 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
                     boolean ktratongtien1 = donDatDAO.UpdateTongTienDonDat(madondat, String.valueOf(tongtien));
                     if (ktraban1 && ktradondat1 && ktratongtien1) {
                         HienThiThanhToan();
-                        TXT_payment_TongTien.setText("0 VNĐ");
+                        txt_thanhtoanActivity_TongTien.setText("0 VNĐ");
                         Toast.makeText(getApplicationContext(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
 
                         // Chuyển về TrangChuActivity
@@ -151,7 +152,7 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
         madondat = (int) donDatDAO.LayMaDonTheoMaBan(maban, "false");
         thanhToanS = thanhToanDAO.LayDSMonTheoMaDon(madondat);
         adapterThanhToan = new AdapterThanhToan(this, R.layout.thanhtoan, thanhToanS);
-        gvDisplayPayment.setAdapter(adapterThanhToan);
+        gvthanhtoanActivity.setAdapter(adapterThanhToan);
         adapterThanhToan.notifyDataSetChanged();
     }
 }

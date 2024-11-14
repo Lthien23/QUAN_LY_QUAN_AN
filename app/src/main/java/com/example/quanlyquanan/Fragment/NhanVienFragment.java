@@ -34,7 +34,7 @@ import java.util.List;
 
 public class NhanVienFragment extends Fragment {
 
-    GridView gvStaff;
+    GridView gvnhanvienFragment;
     NhanVienDAO nhanVienDAO;
     List<NhanVien> nhanVienS;
     AdapterNhanVien adapterNhanVien;
@@ -74,12 +74,12 @@ public class NhanVienFragment extends Fragment {
         ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Quản lý nhân viên");
         setHasOptionsMenu(true);
 
-        gvStaff = (GridView)view.findViewById(R.id.gvStaff) ;
+        gvnhanvienFragment = (GridView)view.findViewById(R.id.gvnhanvienFragment) ;
 
         nhanVienDAO = new NhanVienDAO(getActivity());
         HienThiDSNV();
 
-        registerForContextMenu(gvStaff);
+        registerForContextMenu(gvnhanvienFragment);
 
         return view;
     }
@@ -143,7 +143,7 @@ public class NhanVienFragment extends Fragment {
     private void HienThiDSNV(){
         nhanVienS = nhanVienDAO.LayDSNV();
         adapterNhanVien = new AdapterNhanVien(getActivity(),R.layout.nhanvien,nhanVienS);
-        gvStaff.setAdapter(adapterNhanVien);
+        gvnhanvienFragment.setAdapter(adapterNhanVien);
         adapterNhanVien.notifyDataSetChanged();
     }
 }

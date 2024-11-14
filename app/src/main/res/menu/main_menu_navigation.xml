@@ -15,14 +15,6 @@
         <item android:title="Quản lý">
             <menu>
                 <group android:checkableBehavior="single">
-                    <item
-                        android:id="@+id/nav_table"
-                        android:title="Bàn ăn"
-                        android:icon="@drawable/ic_baseline_airline_seat_legroom_normal_24"/>
-                    <item
-                        android:id="@+id/nav_category"
-                        android:title="Loại món"
-                        android:icon="@drawable/ic_baseline_restaurant_menu_24"/>
 
                     <item
                         android:id="@+id/nav_staff"

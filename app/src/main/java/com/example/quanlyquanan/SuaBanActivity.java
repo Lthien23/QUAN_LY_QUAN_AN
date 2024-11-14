@@ -14,34 +14,42 @@ import com.example.quanlyquanan.R;
 
 public class SuaBanActivity extends AppCompatActivity {
 
-    TextInputLayout TXTL_edittable_tenban;
-    Button BTN_edittable_SuaBan;
-    BanAnDAO banAnDAO;
+    TextInputLayout txtl_suabanActivity_tenban; // Khung nhập tên bàn (TextInputLayout)
+    Button btn_suabanActivity_SuaBan; // Nút thực hiện cập nhật tên bàn
+    BanAnDAO banAnDAO; // Đối tượng DAO để tương tác với cơ sở dữ liệu của bảng Bàn
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sua_ban);
+        setContentView(R.layout.activity_sua_ban); // Thiết lập layout cho activity
 
-        //thuộc tính view
-        TXTL_edittable_tenban = (TextInputLayout)findViewById(R.id.txtl_edittable_tenban);
-        BTN_edittable_SuaBan = (Button)findViewById(R.id.btn_edittable_SuaBan);
+        // Ánh xạ view từ layout XML vào các thuộc tính
+        txtl_suabanActivity_tenban = (TextInputLayout)findViewById(R.id.txtl_suabanActivity_tenban);
+        btn_suabanActivity_SuaBan = (Button)findViewById(R.id.btn_suabanActivity_SuaBan);
 
-        //khởi tạo dao mở kết nối csdl
+        // Khởi tạo đối tượng DAO để mở kết nối đến cơ sở dữ liệu
         banAnDAO = new BanAnDAO(this);
-        int maban = getIntent().getIntExtra("maban",0); //lấy maban từ bàn đc chọn
 
-        BTN_edittable_SuaBan.setOnClickListener(new View.OnClickListener() {
+        // Lấy mã bàn từ Intent (được truyền từ activity gọi đến)
+        int maban = getIntent().getIntExtra("maban", 0);
+
+        // Thiết lập sự kiện khi nhấn nút cập nhật bàn
+        btn_suabanActivity_SuaBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tenban = TXTL_edittable_tenban.getEditText().getText().toString();
+                // Lấy tên bàn mới từ khung nhập
+                String tenban = txtl_suabanActivity_tenban.getEditText().getText().toString();
 
-                if(tenban != null || tenban.equals("")){
-                    boolean ktra = banAnDAO.CapNhatTenBan(maban,tenban);
+                // Kiểm tra nếu tên bàn không null hoặc không rỗng
+                if (tenban != null || !tenban.equals("")) {
+                    // Cập nhật tên bàn trong cơ sở dữ liệu, ktra sẽ nhận kết quả thành công hoặc thất bại
+                    boolean ktra = banAnDAO.CapNhatTenBan(maban, tenban);
+
+                    // Tạo Intent để gửi kết quả cập nhật về activity trước đó
                     Intent intent = new Intent();
-                    intent.putExtra("ketquasua",ktra);
-                    setResult(RESULT_OK,intent);
-                    finish();
+                    intent.putExtra("ketquasua", ktra); // Đưa kết quả cập nhật vào intent
+                    setResult(RESULT_OK, intent); // Trả kết quả về cho activity trước đó
+                    finish(); // Đóng activity hiện tại
                 }
             }
         });

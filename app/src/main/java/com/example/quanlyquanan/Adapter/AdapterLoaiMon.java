@@ -62,26 +62,26 @@ public class AdapterLoaiMon extends BaseAdapter {
             view = inflater.inflate(layout,parent,false);
 
             //truyền component vào viewholder để ko gọi findview ở những lần hiển thị khác
-            viewHolder.img_customcategory_HinhLoai = (ImageView)view.findViewById(R.id.img_customcategory_HinhLoai);
-            viewHolder.txt_customcategory_TenLoai = (TextView)view.findViewById(R.id.txt_customcategory_TenLoai);
+            viewHolder.img_loaimon_HinhLoai = (ImageView)view.findViewById(R.id.img_loaimon_HinhLoai);
+            viewHolder.txt_loaimon_TenLoai = (TextView)view.findViewById(R.id.txt_loaimon_TenLoai);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
         LoaiMon loaiMon = loaiMonList.get(position);
 
-        viewHolder.txt_customcategory_TenLoai.setText(loaiMon.getTenLoai());
+        viewHolder.txt_loaimon_TenLoai.setText(loaiMon.getTenLoai());
 
         byte[] categoryimage = loaiMon.getHinhAnh();
         Bitmap bitmap = BitmapFactory.decodeByteArray(categoryimage,0,categoryimage.length);
-        viewHolder.img_customcategory_HinhLoai.setImageBitmap(bitmap);
+        viewHolder.img_loaimon_HinhLoai.setImageBitmap(bitmap);
 
         return view;
     }
 
     //tạo viewholer lưu trữ component
     public class ViewHolder{
-        TextView txt_customcategory_TenLoai;
-        ImageView img_customcategory_HinhLoai;
+        TextView txt_loaimon_TenLoai;
+        ImageView img_loaimon_HinhLoai;
     }
 }

@@ -10,7 +10,7 @@
     android:padding="10dp"
     >
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtl_addtable_tenban"
+        android:id="@+id/txtl_thembanActivity_tenban"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -31,13 +31,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_addtable_TaoBan"
+        android:id="@+id/btn_thembanActivity_TaoBan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/nau"
         android:text="Tạo bàn"
         android:background="@color/nau"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:backgroundTint="@color/nau" />
 </LinearLayout>

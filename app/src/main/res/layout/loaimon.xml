@@ -16,19 +16,19 @@
 
         </RelativeLayout>
         <TextView
-            android:id="@+id/txt_customcategory_TenLoai"
+            android:id="@+id/txt_loaimon_TenLoai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#CC9966"
+            android:background="@color/nau"
             android:padding="8dp"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/muli_black"
             android:text="Tên loại"
             android:textSize="25sp"
-            android:layout_below="@id/img_customcategory_HinhLoai"/>
+            android:layout_below="@id/img_loaimon_HinhLoai"/>
         <ImageView
-            android:id="@+id/img_customcategory_HinhLoai"
+            android:id="@+id/img_loaimon_HinhLoai"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@drawable/monanminhhoa"

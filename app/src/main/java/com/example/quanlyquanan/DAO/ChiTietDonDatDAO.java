@@ -5,8 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.core.util.Pair;
+
 import com.example.quanlyquanan.Model.ChiTietDonDat;
 import com.example.quanlyquanan.Database.CreateDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChiTietDonDatDAO {
 
@@ -66,6 +71,29 @@ public class ChiTietDonDatDAO {
         }else {
             return false;
         }
+    }
+    public List<Pair<String, Integer>> ThongKeSoLuongMonAn() {
+        List<Pair<String, Integer>> thongKeList = new ArrayList<>();
+
+        String query = "SELECT " + CreateDatabase.TBL_MON_TENMON + ", SUM(" + CreateDatabase.TBL_CHITIETDONDAT_SOLUONG + ") AS SoLuongBanRa " +
+                "FROM " + CreateDatabase.TBL_CHITIETDONDAT +
+                " INNER JOIN " + CreateDatabase.TBL_MON +
+                " ON " + CreateDatabase.TBL_CHITIETDONDAT + "." + CreateDatabase.TBL_CHITIETDONDAT_MAMON +
+                " = " + CreateDatabase.TBL_MON + "." + CreateDatabase.TBL_MON_MAMON +
+                " GROUP BY " + CreateDatabase.TBL_MON_TENMON;
+
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String tenMon = cursor.getString(cursor.getColumnIndex(CreateDatabase.TBL_MON_TENMON));
+                int soLuongBanRa = cursor.getInt(cursor.getColumnIndex("SoLuongBanRa"));
+                thongKeList.add(new Pair<>(tenMon, soLuongBanRa));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return thongKeList;
     }
 
 }

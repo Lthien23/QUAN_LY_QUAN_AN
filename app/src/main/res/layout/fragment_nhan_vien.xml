@@ -6,7 +6,7 @@
     android:paddingTop="5dp">
 
     <GridView
-        android:id="@+id/gvStaff"
+        android:id="@+id/gvnhanvienFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp"

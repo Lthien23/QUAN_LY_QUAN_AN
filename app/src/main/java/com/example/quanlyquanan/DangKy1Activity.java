@@ -19,10 +19,10 @@ import static com.example.quanlyquanan.R.*;
 
 public class DangKy1Activity extends AppCompatActivity {
 
-    ImageView IMG_signup_back;
-    Button BTN_signup_next;
-    TextView TXT_signup_title;
-    TextInputLayout TXTL_signup_HoVaTen, TXTL_signup_TenDN, TXTL_signup_Email, TXTL_signup_SDT, TXTL_signup_MatKhau;
+    ImageView img_dangky1_back;
+    Button btn_dangki1_tieptheo;
+    TextView txt_dangky1_Tieude;
+    TextInputLayout txtl_dangki1_hoten, txtl_dangky1_tendn, txtl_dangki1_Email, txtl_dangki1_sdt, txtl_dangki1_matkhau;
     public static final String BUNDLE = "BUNDLE";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -36,27 +36,27 @@ public class DangKy1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_dang_ky1);
 
-        IMG_signup_back = (ImageView)findViewById(id.img_signup_back);
-        BTN_signup_next = (Button)findViewById(id.btn_signup_next);
-        TXT_signup_title = (TextView)findViewById(id.txt_signup_title);
-        TXTL_signup_HoVaTen = (TextInputLayout)findViewById(id.txtl_signup_HoVaTen);
-        TXTL_signup_TenDN = (TextInputLayout)findViewById(id.txtl_signup_TenDN);
-        TXTL_signup_Email = (TextInputLayout)findViewById(id.txtl_signup_Email);
-        TXTL_signup_SDT = (TextInputLayout)findViewById(id.txtl_signup_SDT);
-        TXTL_signup_MatKhau = (TextInputLayout)findViewById(id.txtl_signup_MatKhau);
+        img_dangky1_back = (ImageView)findViewById(id.img_dangky1_back);
+        btn_dangki1_tieptheo = (Button)findViewById(id.btn_dangki1_tieptheo);
+        txt_dangky1_Tieude = (TextView)findViewById(id.txt_dangky1_Tieude);
+        txtl_dangki1_hoten = (TextInputLayout)findViewById(id.txtl_dangki1_hoten);
+        txtl_dangky1_tendn = (TextInputLayout)findViewById(id.txtl_dangky1_tendn);
+        txtl_dangki1_Email = (TextInputLayout)findViewById(id.txtl_dangki1_Email);
+        txtl_dangki1_sdt = (TextInputLayout)findViewById(id.txtl_dangki1_sdt);
+        txtl_dangki1_matkhau = (TextInputLayout)findViewById(id.txtl_dangki1_matkhau);
 
-        BTN_signup_next.setOnClickListener(new View.OnClickListener() {
+        btn_dangki1_tieptheo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //kiểm tra validate false => phải thỏa đk validate
                 if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassWord()){
                     return;
                 }
-                String hoTen = TXTL_signup_HoVaTen.getEditText().getText().toString();
-                String tenDN = TXTL_signup_TenDN.getEditText().getText().toString();
-                String eMail = TXTL_signup_Email.getEditText().getText().toString();
-                String sDT = TXTL_signup_SDT.getEditText().getText().toString();
-                String matKhau = TXTL_signup_MatKhau.getEditText().getText().toString();
+                String hoTen = txtl_dangki1_hoten.getEditText().getText().toString();
+                String tenDN = txtl_dangky1_tendn.getEditText().getText().toString();
+                String eMail = txtl_dangki1_Email.getEditText().getText().toString();
+                String sDT = txtl_dangki1_sdt.getEditText().getText().toString();
+                String matKhau = txtl_dangki1_matkhau.getEditText().getText().toString();
 
                 byBundleNextSignupScreen(hoTen,tenDN,eMail,sDT,matKhau);
             }
@@ -97,88 +97,88 @@ public class DangKy1Activity extends AppCompatActivity {
 
     //region Validate field
     private boolean validateFullName(){
-        String val = TXTL_signup_HoVaTen.getEditText().getText().toString().trim();
+        String val = txtl_dangki1_hoten.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_signup_HoVaTen.setError(getResources().getString(string.not_empty));
+            txtl_dangki1_hoten.setError(getResources().getString(string.not_empty));
             return false;
         }else {
-            TXTL_signup_HoVaTen.setError(null);
-            TXTL_signup_HoVaTen.setErrorEnabled(false);
+            txtl_dangki1_hoten.setError(null);
+            txtl_dangki1_hoten.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateUserName(){
-        String val = TXTL_signup_TenDN.getEditText().getText().toString().trim();
+        String val = txtl_dangky1_tendn.getEditText().getText().toString().trim();
         String checkspaces = "\\A\\w{1,50}\\z";
 
         if(val.isEmpty()){
-            TXTL_signup_TenDN.setError(getResources().getString(string.not_empty));
+            txtl_dangky1_tendn.setError(getResources().getString(string.not_empty));
             return false;
         }else if(val.length()>50){
-            TXTL_signup_TenDN.setError("Phải nhỏ hơn 50 ký tự");
+            txtl_dangky1_tendn.setError("Phải nhỏ hơn 50 ký tự");
             return false;
         }else if(!val.matches(checkspaces)){
-            TXTL_signup_TenDN.setError("Không được cách chữ!");
+            txtl_dangky1_tendn.setError("Không được cách chữ!");
             return false;
         }
         else {
-            TXTL_signup_TenDN.setError(null);
-            TXTL_signup_TenDN.setErrorEnabled(false);
+            txtl_dangky1_tendn.setError(null);
+            txtl_dangky1_tendn.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validateEmail(){
-        String val = TXTL_signup_Email.getEditText().getText().toString().trim();
+        String val = txtl_dangki1_Email.getEditText().getText().toString().trim();
         String checkspaces = "[a-zA-Z0-9._-]+@[a-z]+.+[a-z]+";
 
         if(val.isEmpty()){
-            TXTL_signup_Email.setError(getResources().getString(string.not_empty));
+            txtl_dangki1_Email.setError(getResources().getString(string.not_empty));
             return false;
         }else if(!val.matches(checkspaces)){
-            TXTL_signup_Email.setError("Email không hợp lệ!");
+            txtl_dangki1_Email.setError("Email không hợp lệ!");
             return false;
         }
         else {
-            TXTL_signup_Email.setError(null);
-            TXTL_signup_Email.setErrorEnabled(false);
+            txtl_dangki1_Email.setError(null);
+            txtl_dangki1_Email.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePhone(){
-        String val = TXTL_signup_SDT.getEditText().getText().toString().trim();
+        String val = txtl_dangki1_sdt.getEditText().getText().toString().trim();
 
 
         if(val.isEmpty()){
-            TXTL_signup_SDT.setError(getResources().getString(string.not_empty));
+            txtl_dangki1_sdt.setError(getResources().getString(string.not_empty));
             return false;
         }else if(val.length() != 10){
-            TXTL_signup_SDT.setError("Số điện thoại không hợp lệ!");
+            txtl_dangki1_sdt.setError("Số điện thoại không hợp lệ!");
             return false;
         }
         else {
-            TXTL_signup_SDT.setError(null);
-            TXTL_signup_SDT.setErrorEnabled(false);
+            txtl_dangki1_sdt.setError(null);
+            txtl_dangki1_sdt.setErrorEnabled(false);
             return true;
         }
     }
 
     private boolean validatePassWord(){
-        String val = TXTL_signup_MatKhau.getEditText().getText().toString().trim();
+        String val = txtl_dangki1_matkhau.getEditText().getText().toString().trim();
 
         if(val.isEmpty()){
-            TXTL_signup_MatKhau.setError(getResources().getString(string.not_empty));
+            txtl_dangki1_matkhau.setError(getResources().getString(string.not_empty));
             return false;
         }else if(!PASSWORD_PATTERN.matcher(val).matches()){
-            TXTL_signup_MatKhau.setError("Mật khẩu ít nhất 6 ký tự!");
+            txtl_dangki1_matkhau.setError("Mật khẩu ít nhất 6 ký tự!");
             return false;
         }
         else {
-            TXTL_signup_MatKhau.setError(null);
-            TXTL_signup_MatKhau.setErrorEnabled(false);
+            txtl_dangki1_matkhau.setError(null);
+            txtl_dangki1_matkhau.setErrorEnabled(false);
             return true;
         }
     }
