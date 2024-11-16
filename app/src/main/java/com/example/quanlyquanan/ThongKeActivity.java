@@ -1,5 +1,7 @@
 package com.example.quanlyquanan;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -151,7 +153,7 @@ public class ThongKeActivity extends AppCompatActivity {
         }
 
         // Lưu file Word
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         if (!path.exists()) {
             path.mkdirs();
         }
