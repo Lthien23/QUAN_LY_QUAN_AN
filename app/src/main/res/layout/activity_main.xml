@@ -15,10 +15,4 @@
         android:src="@drawable/logo"
         android:layout_gravity="center|top"
         />
-    <TextView
-        android:id="@+id/txtPowered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="30dp"/>
 </FrameLayout>

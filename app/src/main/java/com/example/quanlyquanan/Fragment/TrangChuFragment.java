@@ -35,61 +35,87 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Fragment `TrangChuFragment` hiển thị giao diện Trang Chủ với các thông tin:
+ * - Danh sách Loại Món
+ * - Chuyển đến danh sách chi tiết các Loại Món
+ */
 public class TrangChuFragment extends Fragment implements View.OnClickListener {
 
-    RecyclerView rcv_displayhome_LoaiMon;
-    TextView txt_trangchuFragment_Xemchitietloaimon;
-    LoaiMonDAO loaiMonDAO;
-    DonDatDAO donDatDAO;
-    List<LoaiMon> loaiMonList;
-    List<DonDat> donDatS;
-    AdapterRecycleViewLoaiMon adapterRecycleViewLoaiMon;
-    AdapterRecycleViewThongKe adapterRecycleViewThongKe;
+    //region Khai báo biến
+    RecyclerView rcv_displayhome_LoaiMon; // RecyclerView hiển thị danh sách Loại Món
+    TextView txt_trangchuFragment_Xemchitietloaimon; // TextView chuyển đến danh sách chi tiết Loại Món
+    LoaiMonDAO loaiMonDAO; // DAO để thao tác dữ liệu Loại Món
+    DonDatDAO donDatDAO; // DAO để thao tác dữ liệu Đơn Đặt
+    List<LoaiMon> loaiMonList; // Danh sách Loại Món
+    List<DonDat> donDatS; // Danh sách Đơn Đặt
+    AdapterRecycleViewLoaiMon adapterRecycleViewLoaiMon; // Adapter quản lý hiển thị danh sách Loại Món
+    AdapterRecycleViewThongKe adapterRecycleViewThongKe; // Adapter quản lý thống kê
+    //endregion
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trang_chu,container,false);
-        ((TrangChuActivity)getActivity()).getSupportActionBar().setTitle("Trang chủ");
+        // Inflate layout cho Fragment
+        View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
+
+        // Đặt tiêu đề cho ActionBar trong TrangChuActivity
+        ((TrangChuActivity) getActivity()).getSupportActionBar().setTitle("Trang chủ");
+
+        // Cho phép Fragment có thể thêm các menu item vào Toolbar
         setHasOptionsMenu(true);
 
-        //region Lấy dối tượng view
-        rcv_displayhome_LoaiMon = (RecyclerView)view.findViewById(R.id.rcv_trangchuFragment_LoaiMon);
-        txt_trangchuFragment_Xemchitietloaimon = (TextView) view.findViewById(R.id.txt_trangchuFragment_Xemchitietloaimon);
+        //region Lấy các thành phần giao diện từ layout
+        rcv_displayhome_LoaiMon = (RecyclerView) view.findViewById(R.id.rcv_trangchuFragment_LoaiMon); // RecyclerView
+        txt_trangchuFragment_Xemchitietloaimon = (TextView) view.findViewById(R.id.txt_trangchuFragment_Xemchitietloaimon); // TextView
         //endregion
 
-        //khởi tạo kết nối
-        loaiMonDAO = new LoaiMonDAO(getActivity());
-        donDatDAO = new DonDatDAO(getActivity());
+        // Khởi tạo các đối tượng DAO để truy cập dữ liệu
+        loaiMonDAO = new LoaiMonDAO(getActivity()); // Khởi tạo DAO Loại Món
+        donDatDAO = new DonDatDAO(getActivity()); // Khởi tạo DAO Đơn Đặt
 
+        // Hiển thị danh sách Loại Món trên giao diện
         HienThiDSLoai();
 
+        // Đăng ký sự kiện click cho TextView "Xem chi tiết"
         txt_trangchuFragment_Xemchitietloaimon.setOnClickListener(this);
 
-        return view;
+        return view; // Trả về View đã được tạo
     }
 
-    private void HienThiDSLoai(){
-        rcv_displayhome_LoaiMon.setHasFixedSize(true);
-        rcv_displayhome_LoaiMon.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        loaiMonList = loaiMonDAO.LayDSLoaiMon();
-        adapterRecycleViewLoaiMon = new AdapterRecycleViewLoaiMon(getActivity(),R.layout.loaimon,loaiMonList);
-        rcv_displayhome_LoaiMon.setAdapter(adapterRecycleViewLoaiMon);
-        adapterRecycleViewLoaiMon.notifyDataSetChanged();
+    /**
+     * Hiển thị danh sách Loại Món lên RecyclerView.
+     */
+    private void HienThiDSLoai() {
+        rcv_displayhome_LoaiMon.setHasFixedSize(true); // Tăng hiệu suất cho RecyclerView nếu kích thước không thay đổi
+        rcv_displayhome_LoaiMon.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false)
+        ); // Đặt layout cho RecyclerView theo hướng dọc
+
+        loaiMonList = loaiMonDAO.LayDSLoaiMon(); // Lấy danh sách Loại Món từ cơ sở dữ liệu
+        adapterRecycleViewLoaiMon = new AdapterRecycleViewLoaiMon(
+                getActivity(), R.layout.loaimon, loaiMonList
+        ); // Tạo Adapter với danh sách Loại Món
+        rcv_displayhome_LoaiMon.setAdapter(adapterRecycleViewLoaiMon); // Gắn Adapter vào RecyclerView
+        adapterRecycleViewLoaiMon.notifyDataSetChanged(); // Thông báo Adapter cập nhật dữ liệu
     }
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
+        int id = v.getId(); // Lấy ID của View được click
 
-        NavigationView navigationView = (NavigationView)getActivity().findViewById(R.id.navigation_view_trangchu);
-        switch (id){
-            case R.id.txt_trangchuFragment_Xemchitietloaimon:
-                FragmentTransaction tranDisplayCategory = getActivity().getSupportFragmentManager().beginTransaction();
-                tranDisplayCategory.replace(R.id.contentView,new LoaiMonFragment());
-                tranDisplayCategory.addToBackStack(null);
-                tranDisplayCategory.commit();
+        // Truy cập NavigationView trong TrangChuActivity
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigation_view_trangchu);
+
+        switch (id) {
+            case R.id.txt_trangchuFragment_Xemchitietloaimon: // Khi click vào TextView "Xem chi tiết"
+                FragmentTransaction tranDisplayCategory = getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction(); // Bắt đầu giao dịch Fragment cho phép bạn thêm, thay thế, xóa, hoặc thực hiện các thay đổi khác trên các Fragment trong ứng dụng của mình.
+
+                tranDisplayCategory.replace(R.id.contentView, new LoaiMonFragment()); // Thay thế Fragment hiện tại bằng LoaiMonFragment
+                tranDisplayCategory.addToBackStack(null); // Thêm giao dịch vào BackStack để có thể quay lại
+                tranDisplayCategory.commit(); // Hoàn thành giao dịch Fragment
                 break;
-
         }
     }
 }

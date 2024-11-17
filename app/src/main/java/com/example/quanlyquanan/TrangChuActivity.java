@@ -27,145 +27,149 @@ import com.example.quanlyquanan.Fragment.ThongKeFragment;
 import com.example.quanlyquanan.Fragment.BanAnFragment;
 import com.example.quanlyquanan.R;
 
+/**
+ * Activity TrangChuActivity quản lý giao diện chính của ứng dụng với các chức năng như:
+ * - Điều hướng qua Navigation Drawer
+ * - Điều hướng qua Bottom Navigation
+ * - Hiển thị fragment tương ứng với từng chức năng
+ */
 public class TrangChuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    //region Khai báo các thành phần
     MenuItem selectedFeature, selectedManager; // Lưu trữ các menu item đã chọn
     DrawerLayout drawerLayout; // Layout chứa Navigation Drawer
-    NavigationView navigationView; // Navigation view để hiển thị các tùy chọn điều hướng
+    NavigationView navigationView; // Navigation View để hiển thị menu điều hướng
     Toolbar toolbar; // Thanh công cụ của ứng dụng
     FragmentManager fragmentManager; // Quản lý các fragment
-    TextView txt_trangchu_tennv; // Hiển thị tên nhân viên đăng nhập
-    int maquyen = 0; // Quyền của người dùng
-    SharedPreferences sharedPreferences; // Đối tượng lưu trữ dữ liệu chia sẻ
-    BottomNavigationView bottomNavigationView; // Thanh điều hướng ở dưới
+    TextView txt_trangchu_tennv; // Hiển thị tên nhân viên đang đăng nhập
+    int maquyen = 0; // Quyền của người dùng (1: quản lý, 2: nhân viên)
+    SharedPreferences sharedPreferences; // Lưu trữ dữ liệu dùng chung
+    BottomNavigationView bottomNavigationView; // Thanh điều hướng dưới cùng
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chu);
 
-        //region thuộc tính bên view
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView)findViewById(R.id.navigation_view_trangchu);
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
-        View view = navigationView.getHeaderView(0);
-        txt_trangchu_tennv = (TextView) view.findViewById(R.id.txt_trangchu_tennv);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        //region Khởi tạo các thành phần từ layout
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout); // Layout chính chứa Navigation Drawer
+        navigationView = (NavigationView) findViewById(R.id.navigation_view_trangchu); // Navigation View
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar); // Toolbar ứng dụng
+        View view = navigationView.getHeaderView(0); // Header của Navigation Drawer
+        txt_trangchu_tennv = (TextView) view.findViewById(R.id.txt_trangchu_tennv); // TextView hiển thị tên nhân viên
+        bottomNavigationView = findViewById(R.id.bottomNavigationView); // Bottom Navigation View
         //endregion
 
-        // Xử lý toolbar và navigation
-        setSupportActionBar(toolbar); // Tạo toolbar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //region Xử lý toolbar và Navigation Drawer
+        setSupportActionBar(toolbar); // Thiết lập toolbar như ActionBar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Hiển thị nút back trên toolbar
 
-        // Tạo nút mở navigation
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar
-                , R.string.opentoggle, R.string.closetoggle) {
+        // Tạo nút mở/đóng Navigation Drawer
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.opentoggle, R.string.closetoggle
+        ) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+                super.onDrawerOpened(drawerView); // Thực hiện thao tác khi Drawer được mở
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
+                super.onDrawerClosed(drawerView); // Thực hiện thao tác khi Drawer được đóng
             }
         };
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
 
-        // Tự động gán tên nv đăng nhập qua Extras
-        Intent intent = getIntent();
-        String tendn = intent.getStringExtra("tendn");
-        txt_trangchu_tennv.setText("Xin chào "+tendn);
+        drawerLayout.addDrawerListener(drawerToggle); // Gắn listener vào DrawerLayout
+        drawerToggle.syncState(); // Đồng bộ trạng thái Drawer với nút toggle
+        navigationView.setNavigationItemSelectedListener(this); // Đăng ký sự kiện cho Navigation View
+        //endregion
 
-        // Lấy quyền người dùng từ file SharedPreferences
-        sharedPreferences = getSharedPreferences("luuquyen", Context.MODE_PRIVATE);
-        maquyen = sharedPreferences.getInt("maquyen", 0);
+        //region Thiết lập thông tin ban đầu
+        Intent intent = getIntent(); // Nhận Intent từ màn hình trước
+        String tendn = intent.getStringExtra("tendn"); // Lấy tên đăng nhập được truyền qua
+        txt_trangchu_tennv.setText("Xin chào " + tendn); // Hiển thị tên nhân viên trên header
 
-        // Hiển thị fragment Trang Chủ mặc định
-        fragmentManager = getSupportFragmentManager();
-        FragmentTransaction tranDisplayHome = fragmentManager.beginTransaction();
-        TrangChuFragment trangChuFragment = new TrangChuFragment();
-        tranDisplayHome.replace(R.id.contentView, trangChuFragment);
-        tranDisplayHome.commit();
-        navigationView.setCheckedItem(R.id.nav_home);
+        // Lấy quyền người dùng từ SharedPreferences
+        sharedPreferences = getSharedPreferences("luuquyen", Context.MODE_PRIVATE); // Mở file SharedPreferences
+        maquyen = sharedPreferences.getInt("maquyen", 0); // Lấy mã quyền từ file SharedPreferences
 
-        // Xử lý sự kiện bottom navigation
+        // Hiển thị fragment Trang Chủ mặc định khi mở ứng dụng
+        fragmentManager = getSupportFragmentManager(); // Khởi tạo Fragment Manager
+        FragmentTransaction tranDisplayHome = fragmentManager.beginTransaction(); // Bắt đầu giao dịch Fragment
+        TrangChuFragment trangChuFragment = new TrangChuFragment(); // Tạo đối tượng fragment Trang Chủ
+        tranDisplayHome.replace(R.id.contentView, trangChuFragment); // Thay thế nội dung bằng fragment Trang Chủ
+        tranDisplayHome.commit(); // Hoàn thành giao dịch
+        navigationView.setCheckedItem(R.id.nav_home); // Đặt mục Trang Chủ được chọn trên Navigation Drawer
+        //endregion
+
+        //region Xử lý sự kiện Bottom Navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.bottomTC: // Chuyển đến fragment Trang Chủ
-                        TrangChuFragment trangChuFragment = new TrangChuFragment();
-                        fragmentTransaction.replace(R.id.contentView, trangChuFragment);
+                        fragmentTransaction.replace(R.id.contentView, new TrangChuFragment());
                         fragmentTransaction.commit();
                         return true;
 
                     case R.id.bottomBA: // Chuyển đến fragment Bàn Ăn
-                        BanAnFragment banAnFragment = new BanAnFragment();
-                        fragmentTransaction.replace(R.id.contentView, banAnFragment);
+                        fragmentTransaction.replace(R.id.contentView, new BanAnFragment());
                         fragmentTransaction.commit();
                         return true;
 
                     case R.id.bottomMN: // Chuyển đến fragment Loại Món
-                        LoaiMonFragment loaiMonFragment = new LoaiMonFragment();
-                        fragmentTransaction.replace(R.id.contentView, loaiMonFragment);
+                        fragmentTransaction.replace(R.id.contentView, new LoaiMonFragment());
                         fragmentTransaction.commit();
                         return true;
 
                     case R.id.bottomTK: // Chuyển đến fragment Thống Kê
-                        ThongKeFragment thongKeFragment = new ThongKeFragment();
-                        fragmentTransaction.replace(R.id.contentView, thongKeFragment);
+                        fragmentTransaction.replace(R.id.contentView, new ThongKeFragment());
                         fragmentTransaction.commit();
                         return true;
                 }
-                return false;
+                return false; // Không xử lý các mục khác
             }
         });
+        //endregion
     }
 
-    // Xử lý sự kiện chọn item trên Navigation Drawer
+    //region Xử lý sự kiện Navigation Drawer
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        int id = item.getItemId(); // Lấy ID của mục được chọn
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (id) {
             case R.id.nav_home: // Chuyển đến fragment Trang Chủ
-                TrangChuFragment trangChuFragment = new TrangChuFragment();
-                fragmentTransaction.replace(R.id.contentView, trangChuFragment);
+                fragmentTransaction.replace(R.id.contentView, new TrangChuFragment());
                 fragmentTransaction.commit();
-                navigationView.setCheckedItem(item.getItemId());
-                drawerLayout.closeDrawers();
                 break;
 
             case R.id.nav_statistic: // Chuyển đến fragment Thống Kê
-                ThongKeFragment thongKeFragment = new ThongKeFragment();
-                fragmentTransaction.replace(R.id.contentView, thongKeFragment);
+                fragmentTransaction.replace(R.id.contentView, new ThongKeFragment());
                 fragmentTransaction.commit();
-                navigationView.setCheckedItem(item.getItemId());
-                drawerLayout.closeDrawers();
                 break;
-            case R.id.nav_staff: // Chuyển đến fragment Nhân Viên (kiểm tra quyền người dùng)
+
+            case R.id.nav_staff: // Chuyển đến fragment Nhân Viên (nếu quyền là quản lý)
                 if (maquyen == 1) {
-                    NhanVienFragment nhanVienFragment = new NhanVienFragment();
-                    fragmentTransaction.replace(R.id.contentView, nhanVienFragment);
+                    fragmentTransaction.replace(R.id.contentView, new NhanVienFragment());
                     fragmentTransaction.commit();
-                    navigationView.setCheckedItem(item.getItemId());
-                    drawerLayout.closeDrawers();
                 } else {
                     Toast.makeText(getApplicationContext(), "Bạn không có quyền truy cập", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
-            case R.id.nav_logout: // Đăng xuất
+            case R.id.nav_logout: // Hiển thị dialog đăng xuất
                 showLogoutDialog();
                 break;
         }
-        return false;
+        drawerLayout.closeDrawers(); // Đóng Navigation Drawer
+        return true;
     }
+    //endregion
 
-    // Hiển thị dialog xác nhận đăng xuất
+    //region Hiển thị dialog xác nhận đăng xuất
     private void showLogoutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận đăng xuất")
@@ -173,10 +177,10 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
                 .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Nếu chọn "Có", chuyển hướng đến giao diện Đăng Nhập
+                        // Chuyển đến màn hình Đăng Nhập
                         Intent intent = new Intent(TrangChuActivity.this, LuaChonActivity.class);
                         startActivity(intent);
-                        finish(); // Đóng activity hiện tại
+                        finish(); // Đóng màn hình hiện tại
                     }
                 })
                 .setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -188,4 +192,5 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
                 .create()
                 .show();
     }
+    //endregion
 }
