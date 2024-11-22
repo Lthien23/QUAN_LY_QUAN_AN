@@ -136,13 +136,13 @@ public class DangKy2Activity extends AppCompatActivity {
         }
     }
 
-    // Kiểm tra độ tuổi của người dùng (>= 10 tuổi)
+    // Kiểm tra độ tuổi của người dùng (>= 18 tuổi)
     private boolean validateAge(){
         int currentYear = Calendar.getInstance().get(Calendar.YEAR); // Lấy năm hiện tại
         int userAge = dt_dangky2_ngaysinh.getYear(); // Lấy năm sinh của người dùng
         int isAgeValid = currentYear - userAge; // Tính tuổi của người dùng
 
-        if(isAgeValid < 10){ // Nếu tuổi nhỏ hơn 10
+        if(isAgeValid < 18){ // Nếu tuổi nhỏ hơn 18
             Toast.makeText(this,"Bạn không đủ tuổi đăng ký!",Toast.LENGTH_SHORT).show(); // Hiển thị thông báo lỗi
             return false;
         }else {
