@@ -75,7 +75,6 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_mon_an);
 
-        //region Lấy đối tượng view
         img_themmonanActivity_ThemHinh = (ImageView)findViewById(R.id.img_themmonanActivity_ThemHinh);
         img_themmonanActivity_ThemHinh.setTag(R.drawable.ic_baseline_add_circle_24);
         txtl_themmonanActivity_tenmon = (TextInputLayout)findViewById(R.id.txtl_themmonanActivity_tenmon);
@@ -86,7 +85,7 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         rg_themmonanActivity_tinhtrang = (RadioGroup)findViewById(R.id.rg_themmonanActivity_tinhtrang);
         rd_themmonanActivity_conmon = (RadioButton)findViewById(R.id.rd_themmonanActivity_conmon);
         rd_themmonanActivity_hetmon = (RadioButton)findViewById(R.id.rd_themmonanActivity_hetmon);
-        //endregion
+
 
         Intent intent = getIntent();
         maloai = intent.getIntExtra("maLoai",-1);
@@ -97,7 +96,6 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         BitmapDrawable olddrawable = (BitmapDrawable)img_themmonanActivity_ThemHinh.getDrawable();
         bitmapold = olddrawable.getBitmap();
 
-        //region Hiển thị trang sửa nếu được chọn từ context menu sửa
         mamon = getIntent().getIntExtra("mamon",0);
         if(mamon != 0){
             Mon mon = monDAO.LayMonTheoMa(mamon);
@@ -120,7 +118,6 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
             btn_themmonanActivity_themmon.setText("Sửa món");
         }
 
-        //endregion
 
         img_themmonanActivity_ThemHinh.setOnClickListener(this);
         btn_themmonanActivity_themmon.setOnClickListener(this);
@@ -177,7 +174,6 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    //Chuyển ảnh bitmap về mảng byte lưu vào csdl
     private byte[] imageViewtoByte(ImageView imageView){
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -186,7 +182,6 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
         return byteArray;
     }
 
-    //region Validate field
     private boolean validateImage(){
         BitmapDrawable drawable = (BitmapDrawable)img_themmonanActivity_ThemHinh.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
@@ -225,6 +220,5 @@ public class ThemMonAnActivity extends AppCompatActivity implements View.OnClick
             return true;
         }
     }
-    //endregion
 
 }

@@ -24,7 +24,6 @@ public class AdapterMonAn extends BaseAdapter {
     List<Mon> monList;
     Viewholder viewholder;
 
-    //constructor
     public AdapterMonAn(Context context, int layout, List<Mon> monList){
         this.context = context;
         this.layout = layout;
@@ -66,14 +65,12 @@ public class AdapterMonAn extends BaseAdapter {
         viewholder.txt_monan_TenMon.setText(mon.getTenMon());
         viewholder.txt_monan_GiaTien.setText(mon.getGiaTien()+" VNĐ");
 
-        //hiển thị tình trạng của món
         if(mon.getTinhTrang().equals("true")){
             viewholder.txt_monan_TinhTrang.setText("Còn món");
         }else{
             viewholder.txt_monan_TinhTrang.setText("Hết món");
         }
 
-        //lấy hình ảnh
         if(mon.getHinhAnh() != null){
             byte[] menuimage = mon.getHinhAnh();
             Bitmap bitmap = BitmapFactory.decodeByteArray(menuimage,0,menuimage.length);
@@ -85,7 +82,6 @@ public class AdapterMonAn extends BaseAdapter {
         return view;
     }
 
-    //tạo viewholer lưu trữ component
     public class Viewholder{
         ImageView img_monan_HinhMon;
         TextView txt_monan_TenMon, txt_monan_GiaTien,txt_monan_TinhTrang;

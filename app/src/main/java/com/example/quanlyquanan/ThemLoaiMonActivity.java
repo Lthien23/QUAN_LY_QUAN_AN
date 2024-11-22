@@ -38,9 +38,8 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
     TextInputLayout txtl_themloaimonActivity_tenloai;
     LoaiMonDAO loaiMonDAO;
     int maloai = 0;
-    Bitmap bitmapold;   //Bitmap dạng ảnh theo ma trận các pixel
+    Bitmap bitmapold;
 
-    //dùng result launcher do activityforresult ko dùng đc nữa
     ActivityResultLauncher<Intent> resultLauncherOpenIMG = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -63,23 +62,20 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_loai_mon);
 
-        loaiMonDAO = new LoaiMonDAO(this);  //khởi tạo đối tượng dao kết nối csdl
+        loaiMonDAO = new LoaiMonDAO(this);
 
-        //region Lấy đối tượng view
         btn_themloaimonActivity_themloaimon = (Button)findViewById(R.id.btn_themloaimonActivity_themloaimon);
         txtl_themloaimonActivity_tenloai = (TextInputLayout)findViewById(R.id.txtl_themloaimonActivity_tenloai);
         img_themloaimonActivity_ThemHinh = (ImageView)findViewById(R.id.img_themloaimonActivity_ThemHinh);
-        //endregion
+
 
         BitmapDrawable olddrawable = (BitmapDrawable)img_themloaimonActivity_ThemHinh.getDrawable();
         bitmapold = olddrawable.getBitmap();
 
-        //region Hiển thị trang sửa nếu được chọn từ context menu sửa
         maloai = getIntent().getIntExtra("maloai",0);
         if(maloai != 0){
             LoaiMon loaiMon = loaiMonDAO.LayLoaiMonTheoMa(maloai);
 
-            //Hiển thị lại thông tin từ csdl
             txtl_themloaimonActivity_tenloai.getEditText().setText(loaiMon.getTenLoai());
 
             byte[] categoryimage = loaiMon.getHinhAnh();
@@ -88,7 +84,6 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
 
             btn_themloaimonActivity_themloaimon.setText("Sửa loại");
         }
-        //endregion
 
         img_themloaimonActivity_ThemHinh.setOnClickListener(this);
         btn_themloaimonActivity_themloaimon.setOnClickListener(this);
@@ -102,9 +97,9 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         switch (id){
             case R.id.img_themloaimonActivity_ThemHinh:
                 Intent iGetIMG = new Intent();
-                iGetIMG.setType("image/*"); //lấy những mục chứa hình ảnh
-                iGetIMG.setAction(Intent.ACTION_GET_CONTENT);   //lấy mục hiện tại đang chứa hình
-                resultLauncherOpenIMG.launch(Intent.createChooser(iGetIMG,getResources().getString(R.string.choseimg)));    //mở intent chọn hình ảnh
+                iGetIMG.setType("image/*");
+                iGetIMG.setAction(Intent.ACTION_GET_CONTENT);
+                resultLauncherOpenIMG.launch(Intent.createChooser(iGetIMG,getResources().getString(R.string.choseimg)));
                 break;
 
             case R.id.btn_themloaimonActivity_themloaimon:
@@ -124,7 +119,6 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
                     chucnang = "themloai";
                 }
 
-                //Thêm, sửa loại dựa theo obj loaimon
                 Intent intent = new Intent();
                 intent.putExtra("ktra",ktra);
                 intent.putExtra("chucnang",chucnang);
@@ -135,7 +129,6 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    //Chuyển ảnh bitmap về mảng byte lưu vào csdl
     private byte[] imageViewtoByte(ImageView imageView){
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -144,7 +137,6 @@ public class ThemLoaiMonActivity extends AppCompatActivity implements View.OnCli
         return byteArray;
     }
 
-    //region validate fields
     private boolean validateImage(){
         BitmapDrawable drawable = (BitmapDrawable)img_themloaimonActivity_ThemHinh.getDrawable();
         Bitmap bitmap = drawable.getBitmap();

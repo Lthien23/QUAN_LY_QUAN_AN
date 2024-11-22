@@ -30,7 +30,6 @@ public class AdapterLoaiMon extends BaseAdapter {
     List<LoaiMon> loaiMonList ;
     ViewHolder viewHolder;
 
-    //constructor
     public AdapterLoaiMon(Context context, int layout, List<LoaiMon> loaiMonList){
         this.context = context;
         this.layout = layout;
@@ -55,13 +54,11 @@ public class AdapterLoaiMon extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        //nếu lần đầu gọi view
         if(view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout,parent,false);
 
-            //truyền component vào viewholder để ko gọi findview ở những lần hiển thị khác
             viewHolder.img_loaimon_HinhLoai = (ImageView)view.findViewById(R.id.img_loaimon_HinhLoai);
             viewHolder.txt_loaimon_TenLoai = (TextView)view.findViewById(R.id.txt_loaimon_TenLoai);
             view.setTag(viewHolder);
@@ -79,7 +76,6 @@ public class AdapterLoaiMon extends BaseAdapter {
         return view;
     }
 
-    //tạo viewholer lưu trữ component
     public class ViewHolder{
         TextView txt_loaimon_TenLoai;
         ImageView img_loaimon_HinhLoai;

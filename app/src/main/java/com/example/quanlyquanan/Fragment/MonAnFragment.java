@@ -127,14 +127,12 @@ public class MonAnFragment extends Fragment {
         return view;
     }
 
-    //tạo 1 menu context show lựa chọn
     @Override
     public void onCreateContextMenu(ContextMenu menu,View v,ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getActivity().getMenuInflater().inflate(R.menu.edit_context_menu,menu);
     }
 
-    //Tạo phần sửa và xóa trong menu context
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();

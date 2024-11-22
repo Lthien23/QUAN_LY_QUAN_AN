@@ -25,9 +25,9 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
-                    //"(?=.*[@#$%^&+=])" +     // at least 1 special character
-                    "(?=\\S+$)" +            // no white spaces
-                    ".{6,}" +                // at least 4 characters
+                    //"(?=.*[@#$%^&+=])" +
+                    "(?=\\S+$)" +
+                    ".{6,}" +
                     "$");
 
     TextInputLayout txtl_themnhanvienActivity_hoten, txtl_themnhanvienActivity_tendn, txtl_themnhanvienActivity_Email, txtl_themnhanvienActivity_SDT, txtl_themnhanvienActivity_matkhau;
@@ -45,7 +45,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_nhan_vien);
 
-        //region Lấy đối tượng trong view
         txtl_themnhanvienActivity_hoten = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_hoten);
         txtl_themnhanvienActivity_tendn = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_tendn);
         txtl_themnhanvienActivity_Email = (TextInputLayout)findViewById(R.id.txtl_themnhanvienActivity_Email);
@@ -61,23 +60,18 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         dt_themnhanvienActivity_NgaySinh = (DatePicker)findViewById(R.id.dt_themnhanvienActivity_NgaySinh);
         btn_themnhanvienActivity_ThemNV = (Button)findViewById(R.id.btn_themnhanvienActivity_ThemNV);
 
-        //endregion
-
         nhanVienDAO = new NhanVienDAO(this);
 
-        //region Hiển thị trang sửa nếu được chọn từ context menu sửa
-        manv = getIntent().getIntExtra("manv",0);   //lấy manv từ display staff
+        manv = getIntent().getIntExtra("manv",0);
         if(manv != 0){
             NhanVien nhanVien = nhanVienDAO.LayNVTheoMa(manv);
 
-            //Hiển thị thông tin từ csdl
             txtl_themnhanvienActivity_hoten.getEditText().setText(nhanVien.getHOTENNV());
             txtl_themnhanvienActivity_tendn.getEditText().setText(nhanVien.getTENDN());
             txtl_themnhanvienActivity_Email.getEditText().setText(nhanVien.getEMAIL());
             txtl_themnhanvienActivity_SDT.getEditText().setText(nhanVien.getSDT());
             txtl_themnhanvienActivity_matkhau.getEditText().setText(nhanVien.getMATKHAU());
 
-            //Hiển thị giới tính từ csdl
             String gioitinh = nhanVien.getGIOITINH();
             if(gioitinh.equals("Nam")){
                 rd_themnhanvienActivity_Nam.setChecked(true);
@@ -93,7 +87,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                 rd_themnhanvienActivity_NhanVien.setChecked(true);
             }
 
-            //Hiển thị ngày sinh từ csdl
             String date = nhanVien.getNGAYSINH();
             String[] items = date.split("/");
             int day = Integer.parseInt(items[0]);
@@ -102,7 +95,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
             dt_themnhanvienActivity_NgaySinh.updateDate(year,month,day);
             btn_themnhanvienActivity_ThemNV.setText("Sửa nhân viên");
         }
-        //endregion
 
         btn_themnhanvienActivity_ThemNV.setOnClickListener(this);
     }
@@ -117,7 +109,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                         !validatePermission() | !validatePhone() | !validateUserName()){
                     return;
                 }
-                //Lấy dữ liệu từ view
                 hoTen = txtl_themnhanvienActivity_hoten.getEditText().getText().toString();
                 tenDN = txtl_themnhanvienActivity_tendn.getEditText().getText().toString();
                 eMail = txtl_themnhanvienActivity_Email.getEditText().getText().toString();
@@ -137,7 +128,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                 ngaySinh = dt_themnhanvienActivity_NgaySinh.getDayOfMonth() + "/" + (dt_themnhanvienActivity_NgaySinh.getMonth() + 1)
                         +"/"+dt_themnhanvienActivity_NgaySinh.getYear();
 
-                //truyền dữ liệu vào obj nhanvien
                 NhanVien nhanVien = new NhanVien();
                 nhanVien.setHOTENNV(hoTen);
                 nhanVien.setTENDN(tenDN);
@@ -155,7 +145,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
                     ktra = nhanVienDAO.ThemNhanVien(nhanVien);
                     chucnang = "themnv";
                 }
-                //Thêm, sửa nv dựa theo obj nhanvien
                 Intent intent = new Intent();
                 intent.putExtra("ketquaktra",ktra);
                 intent.putExtra("chucnang",chucnang);
@@ -165,7 +154,6 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    //region validate fields
     private boolean validateFullName(){
         String val = txtl_themnhanvienActivity_hoten.getEditText().getText().toString().trim();
 
@@ -283,6 +271,5 @@ public class ThemNhanVienActivity extends AppCompatActivity implements View.OnCl
             return true;
         }
     }
-    //endregion
 
 }

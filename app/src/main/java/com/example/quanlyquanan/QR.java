@@ -26,10 +26,9 @@ public class QR extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Đóng màn hình QR và chuyển sang màn hình CTHD (Chi tiết hóa đơn)
                 Intent intent = new Intent(QR.this, TrangChuActivity.class);
                 startActivity(intent);
-                finish(); // Kết thúc màn hình QR để không thể quay lại bằng nút Back
+                finish();
             }
         });
     }

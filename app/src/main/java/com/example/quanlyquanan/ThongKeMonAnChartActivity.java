@@ -51,10 +51,8 @@ public class ThongKeMonAnChartActivity extends AppCompatActivity {
     }
 
     private void loadChartData() {
-        // Lấy dữ liệu từ cơ sở dữ liệu
         List<Pair<String, Integer>> thongKeList = chiTietDonDatDAO.ThongKeSoLuongMonAn();
 
-        // Tạo danh sách BarEntry và label cho biểu đồ
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
@@ -65,16 +63,15 @@ public class ThongKeMonAnChartActivity extends AppCompatActivity {
         }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "Số lượng bán");
-        barDataSet.setColor(getResources().getColor(R.color.teal_700)); // Thay đổi màu nếu muốn
+        barDataSet.setColor(getResources().getColor(R.color.teal_700));
 
         BarData data = new BarData(barDataSet);
-        data.setBarWidth(0.9f); // Đặt độ rộng cho từng cột
+        data.setBarWidth(0.9f);
         barChart.setData(data);
 
-        // Đặt labels cho trục X
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
-        barChart.invalidate(); // Refresh biểu đồ
+        barChart.invalidate();
     }
 }

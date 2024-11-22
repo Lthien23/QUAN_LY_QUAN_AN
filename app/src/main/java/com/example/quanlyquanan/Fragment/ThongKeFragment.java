@@ -91,7 +91,6 @@ public class ThongKeFragment extends Fragment {
             }
         });
 
-        // Thêm sự kiện cho floatingActionButton
         floatingActionButton.setOnClickListener(v -> {
             try {
                 exportAllOrdersToWord();
@@ -134,18 +133,15 @@ public class ThongKeFragment extends Fragment {
         startActivity(intent);
     }
 
-    // Hàm xuất toàn bộ đơn đặt vào file Word
     private void exportAllOrdersToWord() throws IOException {
         XWPFDocument document = new XWPFDocument();
 
-        // Tiêu đề
         XWPFParagraph title = document.createParagraph();
         XWPFRun titleRun = title.createRun();
         titleRun.setText("Danh sách hóa đơn");
         titleRun.setBold(true);
         titleRun.setFontSize(16);
 
-        // Tạo bảng
         XWPFTable table = document.createTable();
         XWPFTableRow headerRow = table.getRow(0);
         headerRow.getCell(0).setText("Mã Đơn");
@@ -154,13 +150,11 @@ public class ThongKeFragment extends Fragment {
         headerRow.addNewTableCell().setText("Tên NV");
         headerRow.addNewTableCell().setText("Tổng Tiền");
 
-        // Duyệt qua tất cả các đơn đặt hàng và thêm vào bảng
         for (DonDat donDat : donDatS) {
             XWPFTableRow dataRow = table.createRow();
             dataRow.getCell(0).setText(String.valueOf(donDat.getMaDonDat()));
             dataRow.getCell(1).setText(donDat.getNgayDat());
 
-            // Sử dụng `donDat.getMaBan()` và `donDat.getMaNV()` thay vì `maban` và `manv`
             String tenBan = banAnDAO.LayTenBanTheoMa(donDat.getMaBan());
             String tenNV = nhanVienDAO.LayNVTheoMa(donDat.getMaNV()).getHOTENNV();
 
@@ -169,7 +163,6 @@ public class ThongKeFragment extends Fragment {
             dataRow.getCell(4).setText(donDat.getTongTien());
         }
 
-        // Lưu file Word
         File path = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         if (!path.exists()) {
             path.mkdirs();

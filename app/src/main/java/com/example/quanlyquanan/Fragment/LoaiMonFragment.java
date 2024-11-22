@@ -47,7 +47,6 @@ public class LoaiMonFragment extends Fragment {
     FragmentManager fragmentManager;
     int maban;
 
-    //Dùng activity result để nhận data gửi từ activity loai mon
     ActivityResultLauncher<Intent> resultLauncherCategory = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -120,14 +119,12 @@ public class LoaiMonFragment extends Fragment {
         return view;
     }
 
-    //hiển thị contextmenu
     @Override
     public void onCreateContextMenu(ContextMenu menu,View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getActivity().getMenuInflater().inflate(R.menu.edit_context_menu,menu);
     }
 
-    //xử lí context menu
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -158,7 +155,6 @@ public class LoaiMonFragment extends Fragment {
         return true;
     }
 
-    //khởi tạo nút thêm loại
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -167,7 +163,6 @@ public class LoaiMonFragment extends Fragment {
         itAddCategory.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
-    //xử lý nút thêm loại
     @Override
     public boolean onOptionsItemSelected( MenuItem item) {
         int id = item.getItemId();
@@ -180,7 +175,6 @@ public class LoaiMonFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    //hiển thị dữ liệu trên gridview
     private void HienThiDSLoai(){
         loaiMonList = loaiMonDAO.LayDSLoaiMon();
         adapter = new AdapterLoaiMon(getActivity(),R.layout.loaimon,loaiMonList);

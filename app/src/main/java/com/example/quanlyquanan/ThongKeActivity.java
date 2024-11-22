@@ -110,14 +110,12 @@ public class ThongKeActivity extends AppCompatActivity {
     private void exportToWord() throws IOException {
         XWPFDocument document = new XWPFDocument();
 
-        // Tiêu đề
         XWPFParagraph title = document.createParagraph();
         XWPFRun titleRun = title.createRun();
         titleRun.setText("Hóa đơn");
         titleRun.setBold(true);
         titleRun.setFontSize(16);
 
-        // Bảng 1: Thông tin hóa đơn
         XWPFTable tableInfo = document.createTable();
         XWPFTableRow headerRowInfo = tableInfo.getRow(0);
         headerRowInfo.getCell(0).setText("Mã Đơn");
@@ -133,18 +131,15 @@ public class ThongKeActivity extends AppCompatActivity {
         dataRowInfo.getCell(3).setText(nhanVienDAO.LayNVTheoMa(manv).getHOTENNV());
         dataRowInfo.getCell(4).setText(tongtien);
 
-        // Thêm dòng trống giữa hai bảng
         XWPFParagraph space = document.createParagraph();
         space.createRun().addBreak();
 
-        // Bảng 2: Chi tiết món ăn
         XWPFTable tableItems = document.createTable();
         XWPFTableRow headerRowItems = tableItems.getRow(0);
         headerRowItems.getCell(0).setText("Tên Món");
         headerRowItems.addNewTableCell().setText("Số Lượng");
         headerRowItems.addNewTableCell().setText("Đơn Giá");
 
-        // Thêm các món ăn vào bảng
         for (ThanhToan thanhToan : thanhToanList) {
             XWPFTableRow itemRow = tableItems.createRow();
             itemRow.getCell(0).setText(thanhToan.getTenMon());
@@ -152,7 +147,6 @@ public class ThongKeActivity extends AppCompatActivity {
             itemRow.getCell(2).setText(String.valueOf(thanhToan.getGiaTien()));
         }
 
-        // Lưu file Word
         File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         if (!path.exists()) {
             path.mkdirs();

@@ -42,7 +42,7 @@ public class DoanhThuChartActivity extends AppCompatActivity {
         for (int i = 0; i < doanhThuTheoNgay.size(); i++) {
             Pair<String, Float> data = doanhThuTheoNgay.get(i);
             entries.add(new BarEntry(i, data.second));
-            xAxisLabels.add(data.first); // Ngày làm nhãn trục X
+            xAxisLabels.add(data.first);
         }
 
         BarDataSet dataSet = new BarDataSet(entries, "Doanh Thu Theo Ngày (VNĐ)");
